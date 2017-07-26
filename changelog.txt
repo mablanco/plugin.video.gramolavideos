@@ -1,1 +1,2 @@
-Please have a look at commit history at Github
+0.1.0
+First working version

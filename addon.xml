@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.gramolavideos"
+	name="La Gramola de Videos"
+	version="0.1.0"
+	provider-name="mablanco">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="plugin.video.youtube" version="5.4.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="es">La Gramola de Videos</summary>
+		<summary lang="en">La Gramola de Videos (The Spanish Videos Jukebox)</summary>
+		<description lang="es">Una coleccion de videos musicales encontrados en YouTube de artistas y bandas españolas desde los 60 a los 90.</description>
+		<description lang="en">A collection of music videos found in YouTube from spanish artists and bands from the 60s to the 90s.</description>
+		<disclaimer></disclaimer>
+		 <language></language>
+		 <platform>all</platform>
+		 <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		 <forum></forum>
+		 <website>https://github.com/mablanco/plugin.video.gramolavideos</website>
+		 <email></email>
+		 <source></source>
+		 <news></news>
+		 <assets>
+			 <icon>resources/icon.png</icon>
+			 <fanart>resources/fanart.jpg</fanart>
+			 <screenshot></screenshot>
+		 </assets>
+  </extension>
+</addon>

@@ -1,4 +1,4 @@
-# La Gramola de Videos (Addon para Kodi
+# La Gramola de Videos (Addon para Kodi)
 
 ## Introducción
 
@@ -22,6 +22,7 @@ Este addon depende del plugin de YouTube, que debería instalarse automáticamen
 
 ## TODO
 
+- Añadir más vídeos musicales (¿alguien se anima?)
 - Las listas de vídeos se leen desde ficheros CSV cada vez que se accede al listado de años, lo cual dista de ser óptimo.
 - Estas listas se guardan en un diccionario de listas, que hay que ordenar cada vez que se accede al listado de años, lo cual tampoco es lo más adecuado.
 

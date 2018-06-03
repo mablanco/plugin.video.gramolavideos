@@ -1,2 +1,1 @@
-0.1.0
-First working version
+Have a look at https://github.com/mablanco/plugin.video.gramolavideos/commits/master

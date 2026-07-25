@@ -110,17 +110,17 @@
 
 ### Tests for User Story 2
 
-- [ ] T028 [P] [US2] Replace legacy-freeze assertions with desired validation in `tests/unit/test_catalog_load.py` and `tests/unit/test_catalog_edge.py` (omit bad `video_id`, `row_invalid`, unreadable year → errors; quickstart B1–B3)
+- [X] T028 [P] [US2] Replace legacy-freeze assertions with desired validation in `tests/unit/test_catalog_load.py` and `tests/unit/test_catalog_edge.py` (omit bad `video_id`, `row_invalid`, unreadable year → errors; quickstart B1–B3)
 
 ### Implementation for User Story 2
 
-- [ ] T029 [US2] Implement `Year`, `MusicVideo`, `CatalogError`, and `CatalogLoadResult` in `resources/lib/catalog.py` per `data-model.md` and `contracts/catalog.md`
-- [ ] T030 [US2] Enforce row validation (exactly 2 fields, non-empty title, `video_id` `^[A-Za-z0-9_-]{11}$`); omit invalids into `errors` without aborting in `resources/lib/catalog.py`
-- [ ] T031 [P] [US2] Fix or remove invalid entry `Seguridad Social - Chiquilla;d3mZmP_me4` in `resources/csv/1991.csv`
-- [ ] T032 [US2] Add recoverable-error notification helper in `resources/lib/kodi_notify.py` (constitution VIII / FR-012b) using APIs mirrored by `tests/stubs/xbmcgui.py` (or `xbmc`)
-- [ ] T033 [US2] Wire UI to show friendly notice when `CatalogLoadResult.errors` is non-empty and still list residual usable data in `resources/lib/kodi_plugin.py` / `addon.py`
-- [ ] T034 [US2] Add `tests/unit/test_kodi_notify.py` (and extend wiring tests) asserting that recoverable catalog errors trigger the stub notification API and still produce directory items — verify in terminal without Kodi
-- [ ] T035 [US2] Optionally smoke-check quickstart M3 on real Kodi for SC-002 UX; terminal suite (T028+T034) is the required gate
+- [X] T029 [US2] Implement `Year`, `MusicVideo`, `CatalogError`, and `CatalogLoadResult` in `resources/lib/catalog.py` per `data-model.md` and `contracts/catalog.md`
+- [X] T030 [US2] Enforce row validation (exactly 2 fields, non-empty title, `video_id` `^[A-Za-z0-9_-]{11}$`); omit invalids into `errors` without aborting in `resources/lib/catalog.py`
+- [X] T031 [P] [US2] Fix or remove invalid entry `Seguridad Social - Chiquilla;d3mZmP_me4` in `resources/csv/1991.csv`
+- [X] T032 [US2] Add recoverable-error notification helper in `resources/lib/kodi_notify.py` (constitution VIII / FR-012b) using APIs mirrored by `tests/stubs/xbmcgui.py` (or `xbmc`)
+- [X] T033 [US2] Wire UI to show friendly notice when `CatalogLoadResult.errors` is non-empty and still list residual usable data in `resources/lib/kodi_plugin.py` / `addon.py`
+- [X] T034 [US2] Add `tests/unit/test_kodi_notify.py` (and extend wiring tests) asserting that recoverable catalog errors trigger the stub notification API and still produce directory items — verify in terminal without Kodi
+- [X] T035 [US2] Optionally smoke-check quickstart M3 on real Kodi for SC-002 UX; terminal suite (T028+T034) is the required gate
 
 **Checkpoint**: Invalid rows/files handled; pytest+stubs prove notify + residual listing; known bad id fixed in data
 

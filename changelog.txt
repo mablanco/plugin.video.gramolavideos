@@ -1,3 +1,8 @@
+[B]0.2.1[/B]
+- Validación de filas CSV; ids YouTube inválidos se omiten con aviso
+- Notificación amigable si hay errores recuperables de catálogo
+- Corrige id de «Seguridad Social - Chiquilla» (-d3mZmP_me4)
+
 [B]0.2.0[/B]
 - Requiere Kodi Matrix+ (xbmc.python 3.0.0)
 - Reproducción vía setResolvedUrl e historial de directorio coherente

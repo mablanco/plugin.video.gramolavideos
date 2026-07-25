@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Addon para Kodi que muestra una colección de vídeos musicales encontrados en YouTube de artistas y bandas españolas desde los 60 a los 90.
+Addon para Kodi que muestra una colección de vídeos musicales encontrados en YouTube de artistas y bandas españolas de los años **80 y 90** (años de catálogo 1980–1999; sin 1994). La ampliación a los 60 y 70 queda como trabajo de contenido futuro, no como promesa del listado actual.
 
 Este es un proyecto **ya existente** (desarrollado y publicado históricamente de forma manual). En esta etapa se está **integrando el uso de IA** en el flujo de desarrollo (asistencia de código, Speckit/constitution, etc.) para modernizar y mantener el addon sin reescribir su propósito. La gobernanza para ese trabajo vive en `.specify/memory/constitution.md`. El `.gitignore` del repositorio está preparado para evitar filtrar secretos, credenciales y artefactos locales de herramientas de IA.
 
@@ -39,7 +39,8 @@ La rama por defecto del repositorio es **`main`**. El trabajo se hace en ramas f
 
 ## TODO
 
-- Añadir más vídeos musicales (¿alguien se anima?)
+- Añadir más vídeos musicales (¿alguien se anima?), en particular de los 60 y 70 si se quiere ampliar el arco editorial.
+- Opcional: rellenar el hueco de 1994 si aparece material adecuado.
 
 El listado de años solo descubre los ficheros `YYYY.csv` (sin leer su contenido); al abrir un año se carga únicamente ese CSV.
 

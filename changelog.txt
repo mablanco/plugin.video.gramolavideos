@@ -1,3 +1,7 @@
+[B]0.2.3[/B]
+- Descripción alineada con el catálogo real (años 80–90 / 1980–1999)
+- 0 ids YouTube inválidos conocidos en el catálogo versionado
+
 [B]0.2.2[/B]
 - Carga selectiva: listar años sin leer CSV; un año lee solo su fichero
 - addon.py fino; UI/routing en resources/lib/kodi_plugin.py

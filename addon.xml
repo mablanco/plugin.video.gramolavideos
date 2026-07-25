@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.gramolavideos"
 	name="La Gramola de Videos"
-	version="0.2.2"
+	version="0.2.3"
 	provider-name="mablanco">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
@@ -13,8 +13,8 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="es">La Gramola de Videos</summary>
 		<summary lang="en">La Gramola de Videos (The Spanish Videos Jukebox)</summary>
-		<description lang="es">Una coleccion de videos musicales encontrados en YouTube de artistas y bandas españolas desde los 60 a los 90.</description>
-		<description lang="en">A collection of music videos found in YouTube from spanish artists and bands from the 60s to the 90s.</description>
+		<description lang="es">Una colección de vídeos musicales en YouTube de artistas y bandas españolas de los años 80 y 90 (catálogo por años 1980–1999; sin 1994).</description>
+		<description lang="en">A collection of YouTube music videos from Spanish artists and bands of the 1980s and 1990s (catalog years 1980–1999; 1994 not included).</description>
 		<disclaimer></disclaimer>
 		 <language></language>
 		 <platform>all</platform>

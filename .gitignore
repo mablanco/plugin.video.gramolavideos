@@ -1,0 +1,100 @@
+# Local / OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env/
+.env
+.env.*
+!.env.example
+
+# Secrets & credentials (AI, cloud, Kodi, personal)
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+credentials.json
+service-account*.json
+*secret*
+*secrets*
+*.token
+*.tokens
+.npmrc
+.netrc
+
+# AI / agent local state (do not leak prompts, keys, or private chats)
+.cursor/*.log
+.cursor/mcp.json
+.cursor/mcp*.json
+.cursor/argv.json
+.claude/
+.codex/
+.aider*
+.continue/
+.windsurf/
+*.local.md
+chatgpt-*.md
+.prompt-history/
+.agent/
+.agents/private/
+
+# ---------------------------------------------------------------------------
+# Speckit / specify
+#
+# PROJECT STATE (DO track in git):
+#   .specify/memory/              constitution
+#   .specify/templates/           customized plan/spec/tasks templates
+#   .specify/extensions.yml       enabled extensions for this repo
+#   .specify/init-options.json    how the project was initialized
+#   .specify/integration.json     active agent integration
+#   .cursor/rules/                project agent context (e.g. specify-rules.mdc)
+#   specs/                        feature specs when created
+#
+# REGENERABLE TOOLING (ignore; restore with `specify init` / extension install):
+# ---------------------------------------------------------------------------
+.cursor/skills/
+.specify/scripts/
+.specify/workflows/
+.specify/integrations/
+.specify/extensions/
+.specify/local/
+.specify/*.local.*
+
+# Session pointer to the active feature (local workspace state)
+.specify/feature.json
+
+# Editor / IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Logs & temp
+*.log
+tmp/
+temp/
+.cache/
+
+# Packaging / Kodi zip artifacts
+*.zip
+*.rar
+!resources/**
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/

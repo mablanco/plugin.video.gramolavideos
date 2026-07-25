@@ -96,9 +96,9 @@ def _read_year_file(path, year_id):
 
 
 def load_all_videos(csv_dir):
-    """Legacy-shaped dict year_id -> tuple of raw field lists (unvalidated).
+    """Deprecated helper: load every CSV (tests / debugging only).
 
-    Prefer ``list_years`` / ``load_year`` for validated results.
+    Runtime listing uses ``list_years`` (stems only) and ``load_year`` (one file).
     """
     videoslists = {}
     if not os.path.isdir(csv_dir):
@@ -114,10 +114,7 @@ def load_all_videos(csv_dir):
 
 
 def list_years(csv_dir):
-    """List year stems under ``csv_dir`` without requiring song materialization API.
-
-    Still may scan directory entries; returns ``Year`` objects and recoverable errors.
-    """
+    """List year stems under ``csv_dir`` without opening CSV contents (FR-008)."""
     errors = []
     if not os.path.isdir(csv_dir):
         errors.append(
@@ -141,7 +138,7 @@ def list_years(csv_dir):
 
 
 def load_year(csv_dir, year_id):
-    """Load and validate a single year CSV; omit bad rows into ``errors``."""
+    """Load and validate only ``{year_id}.csv`` (FR-009); omit bad rows into ``errors``."""
     errors = []
     if not os.path.isdir(csv_dir):
         errors.append(

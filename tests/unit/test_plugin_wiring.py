@@ -13,14 +13,15 @@ import xbmcplugin
 
 
 def _run_addon(query):
-    """Import/reload addon.py with plugin argv. ``query`` is the part after ``?``."""
+    """Import/reload thin addon.py (and kodi_plugin) with plugin argv."""
     sys.argv = [
         "plugin://plugin.video.gramolavideos/",
         "1",
         "?" + query if query is not None else "?",
     ]
-    if "addon" in sys.modules:
-        del sys.modules["addon"]
+    for name in ("addon", "kodi_plugin", "kodi_notify", "catalog"):
+        if name in sys.modules:
+            del sys.modules[name]
     return importlib.import_module("addon")
 
 

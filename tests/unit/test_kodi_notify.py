@@ -14,8 +14,9 @@ def _run_addon(query):
         "1",
         "?" + query if query is not None else "?",
     ]
-    if "addon" in sys.modules:
-        del sys.modules["addon"]
+    for name in ("addon", "kodi_plugin", "kodi_notify", "catalog"):
+        if name in sys.modules:
+            del sys.modules[name]
     return importlib.import_module("addon")
 
 

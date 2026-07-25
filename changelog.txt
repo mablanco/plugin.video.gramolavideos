@@ -1,3 +1,7 @@
+[B]0.2.2[/B]
+- Carga selectiva: listar años sin leer CSV; un año lee solo su fichero
+- addon.py fino; UI/routing en resources/lib/kodi_plugin.py
+
 [B]0.2.1[/B]
 - Validación de filas CSV; ids YouTube inválidos se omiten con aviso
 - Notificación amigable si hay errores recuperables de catálogo

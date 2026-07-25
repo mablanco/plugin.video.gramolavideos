@@ -40,8 +40,8 @@ La rama por defecto del repositorio es **`main`**. El trabajo se hace en ramas f
 ## TODO
 
 - Añadir más vídeos musicales (¿alguien se anima?)
-- Las listas de vídeos se leen desde ficheros CSV cada vez que se accede al listado de años, lo cual dista de ser óptimo.
-- Estas listas se guardan en un diccionario de listas, que hay que ordenar cada vez que se accede al listado de años, lo cual tampoco es lo más adecuado.
+
+El listado de años solo descubre los ficheros `YYYY.csv` (sin leer su contenido); al abrir un año se carga únicamente ese CSV.
 
 ## Licencia
 

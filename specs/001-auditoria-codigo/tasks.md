@@ -150,14 +150,14 @@
 
 ### Tests for User Story 4
 
-- [ ] T039 [P] [US4] Add unit tests proving `list_years` does not materialize all songs and `load_year` only reads one file in `tests/unit/test_catalog_selective.py` (SC-004)
+- [X] T039 [P] [US4] Add unit tests proving `list_years` does not materialize all songs and `load_year` only reads one file in `tests/unit/test_catalog_selective.py` (SC-004)
 
 ### Implementation for User Story 4
 
-- [ ] T040 [US4] Implement selective `list_years` in `resources/lib/catalog.py` (stems only; no full song materialization)
-- [ ] T041 [US4] Implement selective `load_year` in `resources/lib/catalog.py` reading only `{year_id}.csv`
-- [ ] T042 [US4] Move listing/resolve UI from monolithic `addon.py` into `resources/lib/kodi_plugin.py`; leave `addon.py` as thin entry that delegates (FR-012b / constitution VII); keep `tests/unit/test_plugin_wiring.py` green via stubs after the move
-- [ ] T043 [US4] Update `README.md` to close TODOs about loading the entire catalog on every use
+- [X] T040 [US4] Implement selective `list_years` in `resources/lib/catalog.py` (stems only; no full song materialization)
+- [X] T041 [US4] Implement selective `load_year` in `resources/lib/catalog.py` reading only `{year_id}.csv`
+- [X] T042 [US4] Move listing/resolve UI from monolithic `addon.py` into `resources/lib/kodi_plugin.py`; leave `addon.py` as thin entry that delegates (FR-012b / constitution VII); keep `tests/unit/test_plugin_wiring.py` green via stubs after the move
+- [X] T043 [US4] Update `README.md` to close TODOs about loading the entire catalog on every use
 
 **Checkpoint**: Layout target for data/UI split; SC-004 met; full suite green without Kodi
 

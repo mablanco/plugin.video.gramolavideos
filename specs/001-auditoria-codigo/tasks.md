@@ -171,9 +171,9 @@
 
 ### Implementation for User Story 6
 
-- [ ] T044 [US6] Align public description/summary in `addon.xml` with actual catalog coverage **or** document an explicit follow-up content plan for 60s–70s in `README.md` / spec notes (constitution III)
-- [ ] T045 [US6] Scan `resources/csv/*.csv` and ensure zero known invalid YouTube ids remain (SC-006 / R5)
-- [ ] T046 [P] [US6] Record AuditFinding status updates (fixed/deferred/accepted) for P1–P3 inventory items in `specs/001-auditoria-codigo/` checklist or plan notes for SC-005
+- [X] T044 [US6] Align public description/summary in `addon.xml` with actual catalog coverage **or** document an explicit follow-up content plan for 60s–70s in `README.md` / spec notes (constitution III)
+- [X] T045 [US6] Scan `resources/csv/*.csv` and ensure zero known invalid YouTube ids remain (SC-006 / R5)
+- [X] T046 [P] [US6] Record AuditFinding status updates (fixed/deferred/accepted) for P1–P3 inventory items in `specs/001-auditoria-codigo/` checklist or plan notes for SC-005
 
 **Checkpoint**: No grave editorial contradiction; SC-006; P1 findings closed or explicitly decided
 

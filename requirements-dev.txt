@@ -1,0 +1,2 @@
+# Desarrollo / CI en host (NO añadir a addon.xml requires)
+pytest>=7.0

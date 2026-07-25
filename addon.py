@@ -10,6 +10,7 @@ _lib_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "resources",
 if _lib_dir not in sys.path:
     sys.path.insert(0, _lib_dir)
 import catalog  # noqa: E402
+import kodi_notify  # noqa: E402
 import kodi_plugin  # noqa: E402
 
 base_url = sys.argv[0]
@@ -24,23 +25,23 @@ def build_url(query):
     return base_url + "?" + urlencode(query)
 
 
-videoslists = catalog.load_all_videos(csvdir)
-yearslist = videoslists.keys()
 if mode is None:
-    for year in sorted(yearslist):
-        url = build_url({"mode": "year", "foldername": year})
-        li = kodi_plugin.folder_listitem(year)
+    result = catalog.list_years(csvdir)
+    kodi_notify.notify_catalog_errors(result.errors)
+    for year in result.years:
+        url = build_url({"mode": "year", "foldername": year.id})
+        li = kodi_plugin.folder_listitem(year.id)
         xbmcplugin.addDirectoryItem(
             handle=addon_handle, url=url, listitem=li, isFolder=True
         )
     xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == "year":
     foldername = args["foldername"][0]
-    for musicvideo in sorted(videoslists[foldername]):
-        # Short / incomplete rows may IndexError — unchanged until US2 validation
-        video_id = musicvideo[1]
-        url = build_url({"mode": "song", "foldername": video_id})
-        li = kodi_plugin.song_listitem(musicvideo[0], video_id)
+    result = catalog.load_year(csvdir, foldername)
+    kodi_notify.notify_catalog_errors(result.errors)
+    for video in result.videos:
+        url = build_url({"mode": "song", "foldername": video.video_id})
+        li = kodi_plugin.song_listitem(video.title, video.video_id)
         xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
     xbmcplugin.endOfDirectory(addon_handle)
 elif mode[0] == "song":

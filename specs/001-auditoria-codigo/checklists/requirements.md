@@ -34,4 +34,5 @@
 - Validación 2026-07-25: la especificación describe hallazgos y el comportamiento deseado en términos de producto/mantenedor; detalles de plataforma se remiten a la constitution del proyecto sin prescribir APIs concretas de implementación.
 - Alcance explícito: `plugin.video.gramolavideos`; reescrituras bajo otro id quedan fuera.
 - Ampliación 2026-07-25: migración de rama por defecto `master` → `main` (US5, FR-018–FR-020, SC-008); checklist revalidada sin marcadores de clarificación.
+- Ampliación 2026-07-25: veredicto sobre `plugin.video.gramola` (no porte; sí layout/notificación/i18n como ideas) — FR-012a/b, SC-009.
 - Lista para `/speckit-clarify` (opcional) o `/speckit-plan`.

@@ -15,6 +15,35 @@ Esta sección resume el resultado de la auditoría del addon publicado
 de remediación es este addon; un andamiaje paralelo con otro id de addon queda
 fuera de alcance.
 
+### Decisión: andamiaje `plugin.video.gramola` (veredicto)
+
+Tras revisar el repositorio hermano `plugin.video.gramola` (plantilla/scaffold
+sin catálogo CSV ni reproducción YouTube, id distinto, un solo commit de
+estructura inicial), se decide:
+
+**No fusionar ni portar ese repositorio** como base de la remediación. El
+producto y los datos viven en `plugin.video.gramolavideos`.
+
+En el plan e implementación de esta feature **SÍ** se pueden adoptar, como
+ideas de diseño (no como copia literal de código legacy Python 2), solo:
+
+1. **Layout**: entry point fino + módulos bajo `resources/lib/`, con prefijo
+   `kodi` para lo que toque APIs de Kodi y módulos sin ese prefijo para la
+   lógica de catálogo verificable sin UI (alineado con constitution VII).
+2. **Avisos al usuario**: un helper acotado de notificación ante fallos
+   recuperables de catálogo (constitution VIII / FR-006).
+3. **Esqueleto i18n**: carpeta `resources/language/` con ficheros de idioma
+   estándar de Kodi cuando se toquen cadenas de UI, con al menos vía clara
+   hacia `es` y `en` (constitution X / FR-015); no hace falta i18n completa
+   en el primer incremento si las cadenas quedan preparadas para extracción.
+
+**Explícitamente fuera de alcance** respecto a ese andamiaje:
+
+- Dependencia `script.module.routing` (YAGNI para el flujo años → canciones).
+- Settings de debug, logging elaborado tipo plantilla, o `.travis.yml` orientado a Python 2.
+- Sustituir el id del addon, metadatos o README por los del scaffold.
+- Traer código de plantilla sin modernizar al destino Kodi/Python 3 del proyecto.
+
 ### Flujo de usuario (años → canciones → reproducción)
 
 | Aspecto | Comportamiento actual | Comportamiento deseado |
@@ -49,7 +78,7 @@ Prioridad orientativa para planificación posterior (`/speckit-plan` / `/speckit
 5. **P2 – Alineación producto–datos**: descripción “60s a 90s” frente a cobertura real ~1980–1999 (sin 1994 ni décadas 60–70).
 6. **P2 – Rama por defecto**: el repositorio usa `master` como rama canónica; conviene migrar a `main` y actualizar enlaces/documentación (p. ej. historial de cambios que cita `commits/master`).
 7. **P3 – Higiene de producto**: metadatos incompletos; historial de cambios poco útil; sin base de idioma para UI; deuda del README sin plan cerrado.
-8. **Fuera de alcance**: reescritura total bajo otro id de addon; capas o frameworks no justificados (constitution IV, IX).
+8. **Fuera de alcance**: reescritura total bajo otro id de addon; fusión/porte del andamiaje `plugin.video.gramola`; capas o frameworks no justificados (p. ej. routing externo) salvo Complexity Tracking (constitution IV, IX).
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -198,6 +227,8 @@ comprobar que no quedan ids de reproducción obviamente inválidos.
 - **FR-010**: La reproducción MUST seguir delegándose en el addon de YouTube declarado como dependencia.
 - **FR-011**: Los cambios de comportamiento relevantes MUST actualizar la versión del addon y quedar reflejados en el historial de cambios del proyecto.
 - **FR-012**: La remediación MUST NOT introducir frameworks o capas que compliquen el producto más allá de lo necesario; toda complejidad extra MUST justificarse en el plan.
+- **FR-012a**: La remediación MUST NOT basarse en fusionar o copiar el repositorio andamiaje `plugin.video.gramola`; MUST limitarse a las ideas de diseño aprobadas en la sección «Decisión: andamiaje plugin.video.gramola».
+- **FR-012b**: Al desacoplar (FR-004/FR-005), el plan MUST preferir entry point fino + `resources/lib/` con separación kodi/datos, helper de notificación ante errores de catálogo, y preparación i18n según esa misma decisión.
 - **FR-013**: El id del addon MUST permanecer `plugin.video.gramolavideos`.
 - **FR-014**: Assets referenciados en metadatos (icono y fanart) MUST seguir existiendo y siendo válidos.
 - **FR-015**: Cualquier cadena nueva de UI tocada en esta remediación MUST quedar en una forma que no impida la futura extracción a ficheros de idioma estándar de Kodi (es + en).
@@ -225,12 +256,14 @@ comprobar que no quedan ids de reproducción obviamente inválidos.
 - **SC-004**: Listar años con un catálogo de prueba de tamaño ≥ 2× el actual no requiere materializar todas las canciones de todos los años (verificable por diseño/prueba de carga selectiva).
 - **SC-005**: Tras la remediación, no quedan hallazgos P1 abiertos del inventario de esta especificación sin decisión explícita documentada (corregido, diferido con justificación, o aceptado como riesgo).
 - **SC-006**: Descripción pública y años/entradas disponibles no presentan contradicción editorial grave; 0 ids de YouTube con formato inválido conocidos en el catálogo versionado.
-- **SC-007**: Un revisor puede mapear cada requisito FR-001–FR-020 a evidencia en plan/tareas o a una exclusión justificada en Complexity Tracking.
+- **SC-007**: Un revisor puede mapear cada requisito FR-001–FR-020 (incl. FR-012a/FR-012b) a evidencia en plan/tareas o a una exclusión justificada en Complexity Tracking.
+- **SC-009**: El plan de remediación no propone adoptar el scaffold `plugin.video.gramola` como base; si menciona ese repo, solo como referencia de las tres ideas aprobadas (layout, notificación, esqueleto i18n).
 - **SC-008**: Tras la migración, la rama por defecto del remoto canónico es `main` y un clon fresco sigue esa rama sin configuración manual adicional; las referencias internas del proyecto a la rama canónica usan `main` (0 enlaces canónicos restantes a `master` en README/changelog del repo).
 
 ## Assumptions
 
 - El sujeto de la auditoría y remediación es `plugin.video.gramolavideos` (este repositorio), no un andamiaje con otro addon id.
+- El veredicto sobre `plugin.video.gramola` (no fusionar; solo layout, notificación e i18n como ideas) es vinculante para `/speckit-plan` e implementación.
 - No se cambia el propósito del producto: índice/navegador de vídeos musicales españoles vía YouTube.
 - La modernización se hace de forma evolutiva sobre el addon existente (constitution IX), no como reescritura total sin plan.
 - El soporte multiidioma completo (ficheros de idioma es/en) puede quedar como seguimiento si esta feature solo deja el código listo para extracción; la UI puede permanecer en español hasta una feature de i18n dedicada.

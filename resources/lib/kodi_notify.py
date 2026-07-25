@@ -1,19 +1,31 @@
 # -*- coding: utf-8 -*-
 """Recoverable-error notifications for catalog issues (constitution VIII)."""
+from __future__ import annotations
+
+from typing import Iterable, Optional
+
 import xbmcgui
 
-DEFAULT_HEADING = "La Gramola de Videos"
+import kodi_i18n
+from catalog import CatalogError
+
+STRING_HEADING = 30000
+STRING_CATALOG_ONE = 30001
+STRING_CATALOG_MANY = 30002
 
 
-def notify_catalog_errors(errors, heading=DEFAULT_HEADING):
+def notify_catalog_errors(
+    errors: Iterable[CatalogError], heading: Optional[str] = None
+) -> None:
     """Show a friendly notice when ``errors`` is non-empty; no-op if empty."""
-    if not errors:
+    error_list = list(errors)
+    if not error_list:
         return
-    count = len(errors)
+    if heading is None:
+        heading = kodi_i18n.localize(STRING_HEADING)
+    count = len(error_list)
     if count == 1:
-        message = "Hay un problema en el catálogo; se muestra lo usable."
+        message = kodi_i18n.localize(STRING_CATALOG_ONE)
     else:
-        message = (
-            "Hay {0} problemas en el catálogo; se muestra lo usable.".format(count)
-        )
+        message = kodi_i18n.localize(STRING_CATALOG_MANY, count)
     xbmcgui.Dialog().notification(heading, message, time=5000)

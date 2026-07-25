@@ -1,3 +1,7 @@
+[B]0.3.0[/B]
+- Cierre remediación: type hints, i18n-ready (es/en), trazabilidad FR
+- Notificaciones de catálogo vía strings localizables
+
 [B]0.2.3[/B]
 - Descripción alineada con el catálogo real (años 80–90 / 1980–1999)
 - 0 ids YouTube inválidos conocidos en el catálogo versionado

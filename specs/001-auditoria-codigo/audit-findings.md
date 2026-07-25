@@ -15,8 +15,8 @@ Estado de los hallazgos del inventario de la spec tras la remediación increment
 | P2-monolito | P2 | Datos y UI acoplados en `addon.py` | **fixed** | US3 extract + US4 `addon.py` fino / `kodi_plugin.run` |
 | P2-editorial | P2 | Promesa 60s–90s vs cobertura ~1980–1999 | **fixed** | US6: description/README alineados a 80s–90s; 60–70 como TODO de contenido |
 | P2-main | P2 | Rama canónica `master` | **fixed** | US5: default `main` + protección de rama |
-| P3-i18n | P3 | Cadenas UI sin esqueleto i18n | **deferred** | Polish T048–T049 |
-| P3-typing | P3 | Sin type hints en lib | **deferred** | Polish T047 |
+| P3-i18n | P3 | Cadenas UI sin esqueleto i18n | **fixed** | Polish: `resources/language/` + `kodi_i18n` |
+| P3-typing | P3 | Sin type hints en lib | **fixed** | Polish: hints graduales en `resources/lib/` |
 | P3-changelog | P3 | Historial poco útil / enlaces a master | **fixed** | US1–US5 changelog + commits/main |
 
 **P1 abiertos**: ninguno.  

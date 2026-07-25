@@ -23,10 +23,12 @@ def test_missing_year_returns_year_missing_error(csv_dir):
 
 def test_missing_csv_dir_error(tmp_path):
     missing = str(tmp_path / "no-such-csv-dir")
-    assert catalog.load_all_videos(missing) == {}
     listed = catalog.list_years(missing)
     assert listed.years == []
     assert any(e.code == "csv_dir_missing" for e in listed.errors)
+    loaded = catalog.load_year(missing, "1980")
+    assert loaded.videos == []
+    assert any(e.code == "csv_dir_missing" for e in loaded.errors)
 
 
 def test_unreadable_year_file_becomes_error(tmp_path):

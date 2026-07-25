@@ -7,6 +7,11 @@ _addon_info = {
     "name": "La Gramola de Videos",
     "version": "0.0.0",
 }
+_STRINGS = {
+    30000: "La Gramola de Videos",
+    30001: "Hay un problema en el catálogo; se muestra lo usable.",
+    30002: "Hay %d problemas en el catálogo; se muestra lo usable.",
+}
 
 
 def reset():
@@ -32,3 +37,6 @@ class Addon(object):
 
     def getSetting(self, key):
         return ""
+
+    def getLocalizedString(self, string_id):
+        return _STRINGS.get(int(string_id), "")

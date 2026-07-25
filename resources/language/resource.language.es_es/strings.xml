@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<strings>
+    <!-- Addon chrome / notifications (FR-015) -->
+    <string id="30000">La Gramola de Videos</string>
+    <string id="30001">Hay un problema en el catálogo; se muestra lo usable.</string>
+    <string id="30002">Hay %d problemas en el catálogo; se muestra lo usable.</string>
+</strings>

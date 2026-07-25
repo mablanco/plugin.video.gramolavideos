@@ -4,6 +4,10 @@
 
 Addon para Kodi que muestra una colección de vídeos musicales encontrados en YouTube de artistas y bandas españolas desde los 60 a los 90.
 
+Este es un proyecto **ya existente** (desarrollado y publicado históricamente de forma manual). En esta etapa se está **integrando el uso de IA** en el flujo de desarrollo (asistencia de código, Speckit/constitution, etc.) para modernizar y mantener el addon sin reescribir su propósito. La gobernanza para ese trabajo vive en `.specify/memory/constitution.md`. El `.gitignore` del repositorio está preparado para evitar filtrar secretos, credenciales y artefactos locales de herramientas de IA.
+
+El trabajo del proyecto (documentación y comunicación con el mantenedor) es en **español**. A futuro, la interfaz del addon debe poder mostrarse también en **inglés** (soporte multiidioma).
+
 ## Instalación
 
 Descarga el fichero ZIP más reciente e instala el addon. Consulta [http://kodi.wiki/view/HOW-TO:Install_an_Add-on_from_a_zip_file][1] para obtener más detalles acerca de la instalación de addons en Kodi mediante paquetes ZIP.

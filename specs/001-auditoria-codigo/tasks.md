@@ -134,9 +134,9 @@
 
 ### Implementation for User Story 5
 
-- [ ] T036 [US5] Migrate repository default branch from `master` to `main` on remote `mablanco/plugin.video.gramolavideos` per `contracts/repo-default-branch.md` (rename + set default)
-- [ ] T037 [P] [US5] Update canonical branch references in `README.md` and `changelog.txt` (`commits/master` → `main` or history URL not tied to `master`)
-- [ ] T038 [US5] Verify default branch and remaining `master` mentions with `gh repo view` and `rg` per quickstart governance; document legacy `master` if kept temporarily (FR-020)
+- [X] T036 [US5] Migrate repository default branch from `master` to `main` on remote `mablanco/plugin.video.gramolavideos` per `contracts/repo-default-branch.md` (rename + set default)
+- [X] T037 [P] [US5] Update canonical branch references in `README.md` and `changelog.txt` (`commits/master` → `main` or history URL not tied to `master`)
+- [X] T038 [US5] Verify default branch and remaining `master` mentions with `gh repo view` and `rg` per quickstart governance; document legacy `master` if kept temporarily (FR-020)
 
 **Checkpoint**: SC-008 satisfied; collaborators clone/PR against `main`
 

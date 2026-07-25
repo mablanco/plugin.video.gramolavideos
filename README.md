@@ -27,7 +27,7 @@ python -m pip install -r requirements-dev.txt
 python -m pytest -q
 ```
 
-`python -m pytest -q` es la vía principal de verificación del refactor (stubs Kodi, sin abrir Kodi). La reproducción real vía YouTube en Kodi sigue siendo smoke manual residual.
+`python -m pytest -q` es la vía principal de verificación del refactor (stubs Kodi, sin abrir Kodi). La reproducción real vía YouTube en Kodi sigue siendo smoke manual residual. En GitHub Actions, el workflow **Tests** ejecuta la misma suite en cada push/PR a `main`.
 
 La rama por defecto del repositorio es **`main`**. El trabajo se hace en ramas feature y se integra mediante pull request (sin push directo a `main`).
 

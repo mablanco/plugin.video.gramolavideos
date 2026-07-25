@@ -183,14 +183,14 @@
 
 **Purpose**: Typing, i18n-ready, versionado, trazabilidad FR, validación final
 
-- [ ] T047 [P] Add gradual type hints in `resources/lib/catalog.py`, `resources/lib/kodi_plugin.py`, and `resources/lib/kodi_notify.py` (research R-012; no strict mypy CI gate unless requested)
-- [ ] T048 [P] Create i18n skeleton `resources/language/resource.language.es_es/` and `resources/language/resource.language.en_gb/` (or `en_us` if chosen) with strings.xml placeholders (FR-015)
-- [ ] T049 Centralize UI strings touched during remediación into the language files / a single gettext-style helper used by `resources/lib/kodi_plugin.py` and `resources/lib/kodi_notify.py`
-- [ ] T050 Remove residual smells (redundant sorts, rigid path leftovers) in `resources/lib/` and `addon.py` justified under constitution IV
-- [ ] T051 Bump version in `addon.xml` and write useful entries in `changelog.txt` for user-visible behavior changes (FR-011)
-- [ ] T052 [P] Produce FR-001–FR-020 → evidence map (tasks/commits/exclusions) for SC-007 in `specs/001-auditoria-codigo/` (checklist or short traceability note)
-- [ ] T053 [P] Confirm out-of-scope: no `script.module.routing`, no scaffold merge, id remains `plugin.video.gramolavideos` (SC-009 / FR-012a / FR-013) in `addon.xml` and deps
-- [ ] T054 Run full `specs/001-auditoria-codigo/quickstart.md` validation prioritizing `python -m pytest -q` (stubs); add manual Kodi only for YouTube smoke + `gh` default-branch check
+- [X] T047 [P] Add gradual type hints in `resources/lib/catalog.py`, `resources/lib/kodi_plugin.py`, and `resources/lib/kodi_notify.py` (research R-012; no strict mypy CI gate unless requested)
+- [X] T048 [P] Create i18n skeleton `resources/language/resource.language.es_es/` and `resources/language/resource.language.en_gb/` (or `en_us` if chosen) with strings.xml placeholders (FR-015)
+- [X] T049 Centralize UI strings touched during remediación into the language files / a single gettext-style helper used by `resources/lib/kodi_plugin.py` and `resources/lib/kodi_notify.py`
+- [X] T050 Remove residual smells (redundant sorts, rigid path leftovers) in `resources/lib/` and `addon.py` justified under constitution IV
+- [X] T051 Bump version in `addon.xml` and write useful entries in `changelog.txt` for user-visible behavior changes (FR-011)
+- [X] T052 [P] Produce FR-001–FR-020 → evidence map (tasks/commits/exclusions) for SC-007 in `specs/001-auditoria-codigo/` (checklist or short traceability note)
+- [X] T053 [P] Confirm out-of-scope: no `script.module.routing`, no scaffold merge, id remains `plugin.video.gramolavideos` (SC-009 / FR-012a / FR-013) in `addon.xml` and deps
+- [X] T054 Run full `specs/001-auditoria-codigo/quickstart.md` validation prioritizing `python -m pytest -q` (stubs); add manual Kodi only for YouTube smoke + `gh` default-branch check
 
 ---
 

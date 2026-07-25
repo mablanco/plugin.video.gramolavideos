@@ -1,56 +1,73 @@
 # -*- coding: utf-8 -*-
 """Catalog CSV load — pure data, no xbmc*."""
+from __future__ import annotations
+
 import csv
 import os
 import re
+from typing import List, Optional, Sequence, Tuple
 
 YEAR_STEM_RE = re.compile(r"^\d{4}$")
 VIDEO_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
 
 
 class Year(object):
-    def __init__(self, id_, csv_path=None):
+    def __init__(self, id_: str, csv_path: Optional[str] = None) -> None:
         self.id = id_
         self.csv_path = csv_path
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "Year({0!r})".format(self.id)
 
 
 class MusicVideo(object):
-    def __init__(self, title, video_id, year_id):
+    def __init__(self, title: str, video_id: str, year_id: str) -> None:
         self.title = title
         self.video_id = video_id
         self.year_id = year_id
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "MusicVideo({0!r}, {1!r})".format(self.title, self.video_id)
 
 
 class CatalogError(object):
-    def __init__(self, code, message, year_id=None, row=None):
+    def __init__(
+        self,
+        code: str,
+        message: str,
+        year_id: Optional[str] = None,
+        row: Optional[str] = None,
+    ) -> None:
         self.code = code
         self.message = message
         self.year_id = year_id
         self.row = row
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return "CatalogError({0!r}, {1!r})".format(self.code, self.message)
 
 
 class CatalogLoadResult(object):
-    def __init__(self, years=None, videos=None, errors=None, ok=True):
+    def __init__(
+        self,
+        years: Optional[List[Year]] = None,
+        videos: Optional[List[MusicVideo]] = None,
+        errors: Optional[List[CatalogError]] = None,
+        ok: bool = True,
+    ) -> None:
         self.years = years if years is not None else []
         self.videos = videos if videos is not None else []
         self.errors = errors if errors is not None else []
         self.ok = ok
 
 
-def _row_raw(fields):
+def _row_raw(fields: Sequence[str]) -> str:
     return ";".join(fields)
 
 
-def _parse_row(fields, year_id):
+def _parse_row(
+    fields: Sequence[str], year_id: str
+) -> Tuple[Optional[MusicVideo], Optional[CatalogError]]:
     """Return (MusicVideo|None, CatalogError|None)."""
     if len(fields) != 2:
         return None, CatalogError(
@@ -78,10 +95,12 @@ def _parse_row(fields, year_id):
     return MusicVideo(title, video_id, year_id), None
 
 
-def _read_year_file(path, year_id):
+def _read_year_file(
+    path: str, year_id: str
+) -> Tuple[List[MusicVideo], List[CatalogError]]:
     """Return (videos, errors). Raises OSError if the file cannot be read."""
-    videos = []
-    errors = []
+    videos: List[MusicVideo] = []
+    errors: List[CatalogError] = []
     with open(path, "r", encoding="utf-8", newline="") as csvfile:
         for fields in csv.reader(csvfile, delimiter=";"):
             if not fields or (len(fields) == 1 and not fields[0].strip()):
@@ -95,27 +114,9 @@ def _read_year_file(path, year_id):
     return videos, errors
 
 
-def load_all_videos(csv_dir):
-    """Deprecated helper: load every CSV (tests / debugging only).
-
-    Runtime listing uses ``list_years`` (stems only) and ``load_year`` (one file).
-    """
-    videoslists = {}
-    if not os.path.isdir(csv_dir):
-        return videoslists
-    for filename in os.listdir(csv_dir):
-        if not filename.endswith(".csv"):
-            continue
-        year_id = os.path.splitext(filename)[0]
-        path = os.path.join(csv_dir, filename)
-        with open(path, "r", encoding="utf-8", newline="") as csvfile:
-            videoslists[year_id] = tuple(csv.reader(csvfile, delimiter=";"))
-    return videoslists
-
-
-def list_years(csv_dir):
+def list_years(csv_dir: str) -> CatalogLoadResult:
     """List year stems under ``csv_dir`` without opening CSV contents (FR-008)."""
-    errors = []
+    errors: List[CatalogError] = []
     if not os.path.isdir(csv_dir):
         errors.append(
             CatalogError(
@@ -125,7 +126,7 @@ def list_years(csv_dir):
         )
         return CatalogLoadResult(years=[], errors=errors, ok=True)
 
-    years = []
+    years: List[Year] = []
     for filename in os.listdir(csv_dir):
         if not filename.endswith(".csv"):
             continue
@@ -137,9 +138,9 @@ def list_years(csv_dir):
     return CatalogLoadResult(years=years, errors=errors, ok=True)
 
 
-def load_year(csv_dir, year_id):
+def load_year(csv_dir: str, year_id: str) -> CatalogLoadResult:
     """Load and validate only ``{year_id}.csv`` (FR-009); omit bad rows into ``errors``."""
-    errors = []
+    errors: List[CatalogError] = []
     if not os.path.isdir(csv_dir):
         errors.append(
             CatalogError(

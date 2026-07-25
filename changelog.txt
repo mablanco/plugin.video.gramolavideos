@@ -1,1 +1,8 @@
+[B]0.2.0[/B]
+- Requiere Kodi Matrix+ (xbmc.python 3.0.0)
+- Reproducción vía setResolvedUrl e historial de directorio coherente
+- Miniaturas YouTube por HTTPS; content type musicvideos
+- Rutas del catálogo vía Addon.getAddonInfo('path')
+
+[B]0.1.x[/B]
 Have a look at https://github.com/mablanco/plugin.video.gramolavideos/commits/master

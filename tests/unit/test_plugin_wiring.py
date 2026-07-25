@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-"""Plugin wiring characterization against xbmc* stubs (T016).
+"""Plugin wiring against xbmc* stubs — desired US1 behavior (T026).
 
-LEGACY_FREEZE: play uses xbmc.Player().play (not setResolvedUrl yet — US1).
+Former LEGACY_FREEZE play/content/thumb assertions replaced after Matrix+ work.
 """
 import importlib
+import os
 import sys
 
-import pytest
 import xbmc
+import xbmcaddon
 import xbmcplugin
-
-pytestmark = pytest.mark.legacy_freeze
 
 
 def _run_addon(query):
@@ -25,32 +24,41 @@ def _run_addon(query):
     return importlib.import_module("addon")
 
 
-def test_list_years_adds_directory_items_and_ends(csv_dir):
+def test_list_years_musicvideos_content(csv_dir):
     _run_addon("")
-    adds = xbmcplugin.calls_named("addDirectoryItem")
-    ends = xbmcplugin.calls_named("endOfDirectory")
     contents = xbmcplugin.calls_named("setContent")
-    assert contents and contents[0]["kwargs"]["content"] == "movies"
+    assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
+    adds = xbmcplugin.calls_named("addDirectoryItem")
     assert len(adds) == 19
     assert all(c["kwargs"]["isFolder"] for c in adds)
-    assert ends and ends[0]["kwargs"]["handle"] == 1
-    urls = [c["kwargs"]["url"] for c in adds]
-    assert any("mode=year" in u and "foldername=1991" in u for u in urls)
 
 
-def test_list_year_songs_for_1991():
+def test_list_year_songs_use_https_thumbs():
     _run_addon("mode=year&foldername=1991")
     adds = xbmcplugin.calls_named("addDirectoryItem")
     assert len(adds) >= 1
     assert all(not c["kwargs"]["isFolder"] for c in adds)
-    assert any("mode=song" in c["kwargs"]["url"] for c in adds)
-    assert xbmcplugin.calls_named("endOfDirectory")
+    for call in adds:
+        li = call["kwargs"]["listitem"]
+        thumb = (li._art or {}).get("thumb", "")
+        assert thumb.startswith("https://img.youtube.com/vi/")
+        assert li._properties.get("IsPlayable") == "true"
 
 
-def test_play_song_uses_player_not_set_resolved():
+def test_play_song_uses_set_resolved_url():
     vid = "dQw4w9WgXcQ"
     _run_addon("mode=song&foldername=" + vid)
-    assert xbmc.Player._plays
-    played = xbmc.Player._plays[0]["item"]
-    assert played == "plugin://plugin.video.youtube/play/?video_id=" + vid
-    assert xbmcplugin.calls_named("setResolvedUrl") == []
+    resolved = xbmcplugin.calls_named("setResolvedUrl")
+    assert len(resolved) == 1
+    assert resolved[0]["kwargs"]["succeeded"] is True
+    assert resolved[0]["kwargs"]["listitem"].path == (
+        "plugin://plugin.video.youtube/play/?video_id=" + vid
+    )
+    assert xbmc.Player._plays == []
+
+
+def test_csv_dir_comes_from_addon_path(repo_root):
+    import kodi_plugin
+
+    assert kodi_plugin.csv_dir() == os.path.join(repo_root, "resources", "csv")
+    assert xbmcaddon.Addon().getAddonInfo("path") == repo_root

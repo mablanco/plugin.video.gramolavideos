@@ -88,15 +88,15 @@
 
 ### Implementation for User Story 1
 
-- [ ] T019 [US1] Update `addon.xml` `xbmc.python` requirement to Matrix+ (`3.0.0` or agreed) while keeping addon id `plugin.video.gramolavideos` (FR-013)
-- [ ] T020 [US1] Replace `urllib` / `urlparse` with `urllib.parse` in `addon.py` (and any extracted kodi module) for Py3
-- [ ] T021 [US1] Switch catalog file I/O in `resources/lib/catalog.py` to text mode with UTF-8 encoding; remove Py2 `.decode` path hacks
-- [ ] T022 [US1] Modernize ListItem construction and set content type to music videos (not `movies`) in `addon.py` or `resources/lib/kodi_plugin.py` (research R-011); extend `tests/stubs/xbmcgui.py` / `xbmcplugin.py` if new APIs are used
-- [ ] T023 [US1] Resolve addon resource paths via `xbmcaddon.Addon().getAddonInfo('path')` (or encapsulated helper) instead of hardcoding `special://home/addons/...`; cover with stub path in `tests/unit/`
-- [ ] T024 [US1] Implement `mode=song` with `xbmcplugin.setResolvedUrl` (or facade) and YouTube URI `plugin://plugin.video.youtube/play/?video_id=...` in `addon.py` / `resources/lib/kodi_plugin.py` (research R-005)
-- [ ] T025 [US1] Use HTTPS YouTube thumbnail URLs and ensure thumbnail failure does not block list items in `resources/lib/kodi_plugin.py` (or `addon.py`) (research R-009)
-- [ ] T026 [US1] Update `tests/unit/test_plugin_wiring.py` (and stubs if needed) so terminal `pytest` asserts `setResolvedUrl`, HTTPS thumbnail URLs, and music-video content type — primary gate before any Kodi smoke
-- [ ] T027 [US1] Optionally smoke-check quickstart M1–M2 on reference Kodi for real YouTube playback (SC-001); do not block refactor completion on this if T026 is green
+- [X] T019 [US1] Update `addon.xml` `xbmc.python` requirement to Matrix+ (`3.0.0` or agreed) while keeping addon id `plugin.video.gramolavideos` (FR-013)
+- [X] T020 [US1] Replace `urllib` / `urlparse` with `urllib.parse` in `addon.py` (and any extracted kodi module) for Py3
+- [X] T021 [US1] Switch catalog file I/O in `resources/lib/catalog.py` to text mode with UTF-8 encoding; remove Py2 `.decode` path hacks
+- [X] T022 [US1] Modernize ListItem construction and set content type to music videos (not `movies`) in `addon.py` or `resources/lib/kodi_plugin.py` (research R-011); extend `tests/stubs/xbmcgui.py` / `xbmcplugin.py` if new APIs are used
+- [X] T023 [US1] Resolve addon resource paths via `xbmcaddon.Addon().getAddonInfo('path')` (or encapsulated helper) instead of hardcoding `special://home/addons/...`; cover with stub path in `tests/unit/`
+- [X] T024 [US1] Implement `mode=song` with `xbmcplugin.setResolvedUrl` (or facade) and YouTube URI `plugin://plugin.video.youtube/play/?video_id=...` in `addon.py` / `resources/lib/kodi_plugin.py` (research R-005)
+- [X] T025 [US1] Use HTTPS YouTube thumbnail URLs and ensure thumbnail failure does not block list items in `resources/lib/kodi_plugin.py` (or `addon.py`) (research R-009)
+- [X] T026 [US1] Update `tests/unit/test_plugin_wiring.py` (and stubs if needed) so terminal `pytest` asserts `setResolvedUrl`, HTTPS thumbnail URLs, and music-video content type — primary gate before any Kodi smoke
+- [X] T027 [US1] Optionally smoke-check quickstart M1–M2 on reference Kodi for real YouTube playback (SC-001); do not block refactor completion on this if T026 is green
 
 **Checkpoint**: Wiring and compat verified in terminal via stubs; optional Kodi smoke for real YouTube only
 

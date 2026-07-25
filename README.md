@@ -18,6 +18,17 @@ Este addon depende del plugin de YouTube, que debería instalarse automáticamen
 
 "La Gramola de Vídeos" es accesible desde el menú de addons de vídeo de Kodi. Una vez abierto, muestra en pantalla una lista de años que contienen a su vez enlaces a los vídeos en YouTube.
 
+## Desarrollo y tests
+
+En el host (Python 3), instala las dependencias de desarrollo y ejecuta la suite. **No** declares `pytest` en `addon.xml` (solo tooling de mantenedor).
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
+
+`python -m pytest -q` es la vía principal de verificación del refactor (stubs Kodi, sin abrir Kodi). La reproducción real vía YouTube en Kodi sigue siendo smoke manual residual.
+
 ## FAQ
 
 **¿Está disponible este addon en un repositorio de Kodi?** No, pero puede que en el futuro. Si alguien quiere echar una mano en el proceso, estaré encantado de recibir su ayuda.

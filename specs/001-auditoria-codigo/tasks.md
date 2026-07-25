@@ -30,9 +30,9 @@
 
 **Purpose**: Harness de desarrollo y estructura mínima para caracterización **sin abrir Kodi**
 
-- [ ] T001 Create directory layout `tests/unit/`, `tests/fixtures/`, `tests/stubs/`, and `resources/lib/` per plan.md project structure
-- [ ] T002 [P] Document or add a minimal `requirements-dev.txt` (or README section) with `pytest` for host Python 3; do not add pytest to `addon.xml` requires; state that `python -m pytest -q` is the primary refactor verification path
-- [ ] T003 [P] Add CSV fixtures under `tests/fixtures/` covering valid year file, short/incomplete row, extra fields, and empty directory case (quickstart C1–C3)
+- [X] T001 Create directory layout `tests/unit/`, `tests/fixtures/`, `tests/stubs/`, and `resources/lib/` per plan.md project structure
+- [X] T002 [P] Document or add a minimal `requirements-dev.txt` (or README section) with `pytest` for host Python 3; do not add pytest to `addon.xml` requires; state that `python -m pytest -q` is the primary refactor verification path
+- [X] T003 [P] Add CSV fixtures under `tests/fixtures/` covering valid year file, short/incomplete row, extra fields, and empty directory case (quickstart C1–C3)
 
 ---
 
@@ -42,14 +42,14 @@
 
 **⚠️ CRITICAL**: No empezar remediación de bugs ni refactor hasta el checkpoint de esta fase. Los stubs `xbmc*` **no** son opcionales: sin ellos no se puede verificar el cableado UI/plugin en CI/terminal.
 
-- [ ] T004 Add `resources/lib/__init__.py` so `resources/lib` is an importable package
-- [ ] T005 Extract *literal* CSV discovery/read/parse from `addon.py` into `resources/lib/catalog.py` with no semantic change (move only; research R-002)
-- [ ] T006 Wire `addon.py` to call `resources/lib/catalog.py` (sys.path / package bootstrap) so Kodi behavior is unchanged aside from import path
-- [ ] T007 Implement stub module `tests/stubs/xbmc.py` covering at least `translatePath`, `log`, and `Player` (with recordable `play` calls) sufficient to import and run plugin modes without real Kodi
-- [ ] T008 [P] Implement stub module `tests/stubs/xbmcgui.py` covering `ListItem` (modern and legacy kwargs as needed) plus a notification/dialog surface usable by recoverable-error helpers
-- [ ] T009 [P] Implement stub module `tests/stubs/xbmcplugin.py` that **records** calls to `addDirectoryItem`, `endOfDirectory`, `setResolvedUrl`, and `setContent` for assertions in unit tests
-- [ ] T010 [P] Implement stub module `tests/stubs/xbmcaddon.py` with `Addon().getAddonInfo('path')` (and related getters) returning a configurable fake addon root for path-resolution tests
-- [ ] T011 Add `tests/conftest.py` that prepends `tests/stubs/` to `sys.path` before imports, resets stub call history per test, and documents how to run the suite with `python -m pytest -q` without launching Kodi
+- [X] T004 Add `resources/lib/__init__.py` so `resources/lib` is an importable package
+- [X] T005 Extract *literal* CSV discovery/read/parse from `addon.py` into `resources/lib/catalog.py` with no semantic change (move only; research R-002)
+- [X] T006 Wire `addon.py` to call `resources/lib/catalog.py` (sys.path / package bootstrap) so Kodi behavior is unchanged aside from import path
+- [X] T007 Implement stub module `tests/stubs/xbmc.py` covering at least `translatePath`, `log`, and `Player` (with recordable `play` calls) sufficient to import and run plugin modes without real Kodi
+- [X] T008 [P] Implement stub module `tests/stubs/xbmcgui.py` covering `ListItem` (modern and legacy kwargs as needed) plus a notification/dialog surface usable by recoverable-error helpers
+- [X] T009 [P] Implement stub module `tests/stubs/xbmcplugin.py` that **records** calls to `addDirectoryItem`, `endOfDirectory`, `setResolvedUrl`, and `setContent` for assertions in unit tests
+- [X] T010 [P] Implement stub module `tests/stubs/xbmcaddon.py` with `Addon().getAddonInfo('path')` (and related getters) returning a configurable fake addon root for path-resolution tests
+- [X] T011 Add `tests/conftest.py` that prepends `tests/stubs/` to `sys.path` before imports, resets stub call history per test, and documents how to run the suite with `python -m pytest -q` without launching Kodi
 
 **Checkpoint**: `import xbmc, xbmcgui, xbmcplugin, xbmcaddon` and `resources/lib/catalog` succeed on host Python; stub call recorders work; addon still opens in real Kodi with legacy behavior
 
@@ -65,16 +65,16 @@
 
 > Escribir tests que fallen o fijar el comportamiento *legacy* real antes de “mejorar” validación (Fase 2 del plan)
 
-- [ ] T012 [P] [US3] Add characterization tests for repo year inventory (1980–1999 without 1994) in `tests/unit/test_catalog_years.py` (quickstart C4)
-- [ ] T013 [P] [US3] Add characterization tests for current row-loading shape (including invalid Chiquilla id still present) in `tests/unit/test_catalog_load.py` (quickstart C1–C2)
-- [ ] T014 [P] [US3] Add characterization tests for missing year / empty / unreadable fixtures in `tests/unit/test_catalog_edge.py` (quickstart C3)
-- [ ] T015 [US3] Document and assert query contract `mode` / `foldername` per `contracts/plugin-navigation.md` in `tests/unit/test_plugin_query_contract.py` (quickstart C5)
-- [ ] T016 [US3] Add plugin-wiring characterization tests in `tests/unit/test_plugin_wiring.py` that invoke list-years / list-year / play entry paths against `tests/stubs/` and assert recorded `xbmcplugin` / `xbmc.Player` calls (so later refactors are verified in terminal only)
+- [X] T012 [P] [US3] Add characterization tests for repo year inventory (1980–1999 without 1994) in `tests/unit/test_catalog_years.py` (quickstart C4)
+- [X] T013 [P] [US3] Add characterization tests for current row-loading shape (including invalid Chiquilla id still present) in `tests/unit/test_catalog_load.py` (quickstart C1–C2)
+- [X] T014 [P] [US3] Add characterization tests for missing year / empty / unreadable fixtures in `tests/unit/test_catalog_edge.py` (quickstart C3)
+- [X] T015 [US3] Document and assert query contract `mode` / `foldername` per `contracts/plugin-navigation.md` in `tests/unit/test_plugin_query_contract.py` (quickstart C5)
+- [X] T016 [US3] Add plugin-wiring characterization tests in `tests/unit/test_plugin_wiring.py` that invoke list-years / list-year / play entry paths against `tests/stubs/` and assert recorded `xbmcplugin` / `xbmc.Player` calls (so later refactors are verified in terminal only)
 
 ### Implementation for User Story 3
 
-- [ ] T017 [US3] Label “legacy freeze” vs future assertions in `tests/unit/` (comments or markers) so Fase 2 can swap validation/playback expectations safely
-- [ ] T018 [US3] Ensure `list_years` / `load_year` function signatures exist on `resources/lib/catalog.py` matching `contracts/catalog.md` even if implementation still mirrors legacy load (research R-008)
+- [X] T017 [US3] Label “legacy freeze” vs future assertions in `tests/unit/` (comments or markers) so Fase 2 can swap validation/playback expectations safely
+- [X] T018 [US3] Ensure `list_years` / `load_year` function signatures exist on `resources/lib/catalog.py` matching `contracts/catalog.md` even if implementation still mirrors legacy load (research R-008)
 
 **Checkpoint**: Suite verde vía stubs; SC-003 baseline; cero cambios de producto observables en Kodi real (salvo path de import)
 

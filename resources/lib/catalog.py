@@ -8,6 +8,16 @@ import os
 import sys
 
 
+class CatalogLoadResult(object):
+    """Minimal result shape (full validation arrives in US2)."""
+
+    def __init__(self, years=None, videos=None, errors=None, ok=True):
+        self.years = years if years is not None else []
+        self.videos = videos if videos is not None else []
+        self.errors = errors if errors is not None else []
+        self.ok = ok
+
+
 def load_all_videos(csv_dir):
     """Discover ``*.csv`` under ``csv_dir`` and parse rows with ``;`` delimiter.
 
@@ -29,3 +39,17 @@ def load_all_videos(csv_dir):
                 tempvideotuple = tuple(videosreader)
                 videoslists[os.path.splitext(filename)[0]] = tempvideotuple
     return videoslists
+
+
+def list_years(csv_dir):
+    """Return years discovered under ``csv_dir`` (legacy: may read all CSVs)."""
+    data = load_all_videos(csv_dir)
+    years = sorted(data.keys())
+    return CatalogLoadResult(years=years, ok=True)
+
+
+def load_year(csv_dir, year_id):
+    """Return rows for ``year_id`` (legacy: may load the whole catalog first)."""
+    data = load_all_videos(csv_dir)
+    rows = list(data.get(year_id, ()))
+    return CatalogLoadResult(videos=rows, ok=True)

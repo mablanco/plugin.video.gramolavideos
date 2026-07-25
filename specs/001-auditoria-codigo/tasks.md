@@ -30,7 +30,7 @@
 
 **Purpose**: Harness de desarrollo y estructura mínima para caracterización **sin abrir Kodi**
 
-- [ ] T001 Create directory layout `tests/unit/`, `tests/fixtures/`, `tests/stubs/`, and `resources/lib/` per plan.md project structure
+- [X] T001 Create directory layout `tests/unit/`, `tests/fixtures/`, `tests/stubs/`, and `resources/lib/` per plan.md project structure
 - [ ] T002 [P] Document or add a minimal `requirements-dev.txt` (or README section) with `pytest` for host Python 3; do not add pytest to `addon.xml` requires; state that `python -m pytest -q` is the primary refactor verification path
 - [ ] T003 [P] Add CSV fixtures under `tests/fixtures/` covering valid year file, short/incomplete row, extra fields, and empty directory case (quickstart C1–C3)
 

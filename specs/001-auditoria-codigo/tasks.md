@@ -42,14 +42,14 @@
 
 **⚠️ CRITICAL**: No empezar remediación de bugs ni refactor hasta el checkpoint de esta fase. Los stubs `xbmc*` **no** son opcionales: sin ellos no se puede verificar el cableado UI/plugin en CI/terminal.
 
-- [ ] T004 Add `resources/lib/__init__.py` so `resources/lib` is an importable package
-- [ ] T005 Extract *literal* CSV discovery/read/parse from `addon.py` into `resources/lib/catalog.py` with no semantic change (move only; research R-002)
-- [ ] T006 Wire `addon.py` to call `resources/lib/catalog.py` (sys.path / package bootstrap) so Kodi behavior is unchanged aside from import path
-- [ ] T007 Implement stub module `tests/stubs/xbmc.py` covering at least `translatePath`, `log`, and `Player` (with recordable `play` calls) sufficient to import and run plugin modes without real Kodi
-- [ ] T008 [P] Implement stub module `tests/stubs/xbmcgui.py` covering `ListItem` (modern and legacy kwargs as needed) plus a notification/dialog surface usable by recoverable-error helpers
-- [ ] T009 [P] Implement stub module `tests/stubs/xbmcplugin.py` that **records** calls to `addDirectoryItem`, `endOfDirectory`, `setResolvedUrl`, and `setContent` for assertions in unit tests
-- [ ] T010 [P] Implement stub module `tests/stubs/xbmcaddon.py` with `Addon().getAddonInfo('path')` (and related getters) returning a configurable fake addon root for path-resolution tests
-- [ ] T011 Add `tests/conftest.py` that prepends `tests/stubs/` to `sys.path` before imports, resets stub call history per test, and documents how to run the suite with `python -m pytest -q` without launching Kodi
+- [X] T004 Add `resources/lib/__init__.py` so `resources/lib` is an importable package
+- [X] T005 Extract *literal* CSV discovery/read/parse from `addon.py` into `resources/lib/catalog.py` with no semantic change (move only; research R-002)
+- [X] T006 Wire `addon.py` to call `resources/lib/catalog.py` (sys.path / package bootstrap) so Kodi behavior is unchanged aside from import path
+- [X] T007 Implement stub module `tests/stubs/xbmc.py` covering at least `translatePath`, `log`, and `Player` (with recordable `play` calls) sufficient to import and run plugin modes without real Kodi
+- [X] T008 [P] Implement stub module `tests/stubs/xbmcgui.py` covering `ListItem` (modern and legacy kwargs as needed) plus a notification/dialog surface usable by recoverable-error helpers
+- [X] T009 [P] Implement stub module `tests/stubs/xbmcplugin.py` that **records** calls to `addDirectoryItem`, `endOfDirectory`, `setResolvedUrl`, and `setContent` for assertions in unit tests
+- [X] T010 [P] Implement stub module `tests/stubs/xbmcaddon.py` with `Addon().getAddonInfo('path')` (and related getters) returning a configurable fake addon root for path-resolution tests
+- [X] T011 Add `tests/conftest.py` that prepends `tests/stubs/` to `sys.path` before imports, resets stub call history per test, and documents how to run the suite with `python -m pytest -q` without launching Kodi
 
 **Checkpoint**: `import xbmc, xbmcgui, xbmcplugin, xbmcaddon` and `resources/lib/catalog` succeed on host Python; stub call recorders work; addon still opens in real Kodi with legacy behavior
 

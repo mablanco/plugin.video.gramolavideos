@@ -1,3 +1,8 @@
+[B]0.3.1[/B]
+- Catálogo: sustituye 25 ids YouTube privados/no disponibles (oEmbed)
+- Aviso claro si un vídeo es privado o ya no está disponible antes de reproducir
+- Descarta fallback SendToKodi; se mantiene solo plugin.video.youtube
+
 [B]0.3.0[/B]
 - Cierre remediación: type hints, i18n-ready (es/en), trazabilidad FR
 - Notificaciones de catálogo vía strings localizables

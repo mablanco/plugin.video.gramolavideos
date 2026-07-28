@@ -12,6 +12,10 @@ _FALLBACK = {
     30000: "La Gramola de Videos",
     30001: "Hay un problema en el catálogo; se muestra lo usable.",
     30002: "Hay %d problemas en el catálogo; se muestra lo usable.",
+    30003: "Este vídeo ya no está disponible en YouTube.",
+    30004: (
+        "Este vídeo es privado o requiere iniciar sesión en YouTube."
+    ),
 }
 
 

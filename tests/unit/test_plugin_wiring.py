@@ -19,7 +19,7 @@ def _run_addon(query):
         "1",
         "?" + query if query is not None else "?",
     ]
-    for name in ("addon", "kodi_plugin", "kodi_notify", "kodi_i18n", "catalog"):
+    for name in ("addon", "kodi_plugin", "kodi_notify", "kodi_i18n", "catalog", "youtube_probe"):
         if name in sys.modules:
             del sys.modules[name]
     return importlib.import_module("addon")
@@ -46,9 +46,22 @@ def test_list_year_songs_use_https_thumbs():
         assert li._properties.get("IsPlayable") == "true"
 
 
-def test_play_song_uses_set_resolved_url():
+def test_play_song_uses_set_resolved_url(monkeypatch):
+    import kodi_plugin
+    import youtube_probe
+
+    monkeypatch.setattr(
+        kodi_plugin.youtube_probe,
+        "probe_youtube_video",
+        lambda *_a, **_k: youtube_probe.STATUS_OK,
+    )
     vid = "dQw4w9WgXcQ"
-    _run_addon("mode=song&foldername=" + vid)
+    sys.argv = [
+        "plugin://plugin.video.gramolavideos/",
+        "1",
+        "?mode=song&foldername=" + vid,
+    ]
+    kodi_plugin.run(sys.argv)
     resolved = xbmcplugin.calls_named("setResolvedUrl")
     assert len(resolved) == 1
     assert resolved[0]["kwargs"]["succeeded"] is True
@@ -56,6 +69,32 @@ def test_play_song_uses_set_resolved_url():
         "plugin://plugin.video.youtube/play/?video_id=" + vid
     )
     assert xbmc.Player._plays == []
+
+
+def test_play_song_blocks_private_with_notification(monkeypatch):
+    import kodi_plugin
+    import youtube_probe
+    import xbmcgui
+
+    monkeypatch.setattr(
+        kodi_plugin.youtube_probe,
+        "probe_youtube_video",
+        lambda *_a, **_k: youtube_probe.STATUS_PRIVATE,
+    )
+    vid = "privateVideo1"
+    sys.argv = [
+        "plugin://plugin.video.gramolavideos/",
+        "1",
+        "?mode=song&foldername=" + vid,
+    ]
+    kodi_plugin.run(sys.argv)
+    resolved = xbmcplugin.calls_named("setResolvedUrl")
+    assert len(resolved) == 1
+    assert resolved[0]["kwargs"]["succeeded"] is False
+    notes = xbmcgui.get_notifications()
+    assert notes
+    msg = notes[0]["message"].lower()
+    assert "privado" in msg or "sesión" in msg
 
 
 def test_csv_dir_comes_from_addon_path(repo_root):

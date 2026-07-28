@@ -13,6 +13,7 @@ import xbmcplugin
 
 import catalog
 import kodi_notify
+import youtube_probe
 
 CONTENT_MUSICVIDEOS = "musicvideos"
 YOUTUBE_PLAY_URI = "plugin://plugin.video.youtube/play/?video_id={video_id}"
@@ -50,6 +51,15 @@ def song_listitem(title: str, video_id: str) -> xbmcgui.ListItem:
 
 
 def resolve_youtube_playback(handle: int, video_id: str) -> str:
+    """Resolve play via YouTube addon; block early on private/unavailable ids."""
+    status = youtube_probe.probe_youtube_video(video_id)
+    if status in (
+        youtube_probe.STATUS_PRIVATE,
+        youtube_probe.STATUS_UNAVAILABLE,
+    ):
+        kodi_notify.notify_playback_blocked(status)
+        xbmcplugin.setResolvedUrl(handle, False, xbmcgui.ListItem())
+        return ""
     play_url = YOUTUBE_PLAY_URI.format(video_id=video_id)
     li = xbmcgui.ListItem(path=play_url)
     xbmcplugin.setResolvedUrl(handle, True, li)

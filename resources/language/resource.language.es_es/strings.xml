@@ -4,4 +4,6 @@
     <string id="30000">La Gramola de Videos</string>
     <string id="30001">Hay un problema en el catálogo; se muestra lo usable.</string>
     <string id="30002">Hay %d problemas en el catálogo; se muestra lo usable.</string>
+    <string id="30003">Este vídeo ya no está disponible en YouTube.</string>
+    <string id="30004">Este vídeo es privado o requiere iniciar sesión en YouTube.</string>
 </strings>

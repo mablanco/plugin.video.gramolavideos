@@ -37,6 +37,8 @@ La rama por defecto del repositorio es **`main`**. El trabajo se hace en ramas f
 
 **¿Puedo añadir más vídeos? ¿Cómo?** Sí, es completamente posible. Basta con editar los ficheros CSV incluidos en el código del addon en la ruta `resources/csv`. En cada fila hay dos campos, el nombre del vídeo (formato: artista - canción) y el código de YouTube del mismo. Cada campo debe estar separado por un punto y coma (;).
 
+**¿Por qué un vídeo no se reproduce?** Suele ser porque el id de YouTube es privado, se retiró o YouTube exige iniciar sesión. La gramola muestra un aviso en esos casos; conviene sustituir el id en el CSV por uno público del mismo tema.
+
 ## TODO
 
 - Añadir más vídeos musicales (¿alguien se anima?), en particular de los 60 y 70 si se quiere ampliar el arco editorial.

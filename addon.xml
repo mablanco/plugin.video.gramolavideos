@@ -13,8 +13,8 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="es">La Gramola de Videos</summary>
 		<summary lang="en">La Gramola de Videos (The Spanish Videos Jukebox)</summary>
-		<description lang="es">Una colección de vídeos musicales en YouTube de artistas y bandas españolas de los años 60, 70, 80 y 90 (semilla 1964–1979 más 1980–1999; sin 1994).</description>
-		<description lang="en">A collection of YouTube music videos from Spanish artists and bands of the 1960s–1990s (seed years 1964–1979 plus 1980–1999; 1994 not included).</description>
+		<description lang="es">Una colección de vídeos musicales en YouTube de artistas y bandas españolas de los años 60, 70, 80 y 90. Navegación por décadas → años → canciones (semilla 1964–1979 más 1980–1999; sin 1994).</description>
+		<description lang="en">A collection of YouTube music videos from Spanish artists and bands of the 1960s–1990s. Browse by decade → year → songs (seed years 1964–1979 plus 1980–1999; 1994 not included).</description>
 		<disclaimer></disclaimer>
 		 <language></language>
 		 <platform>all</platform>

@@ -12,12 +12,21 @@ import xbmcgui
 import xbmcplugin
 
 import catalog
+import kodi_i18n
 import kodi_notify
 import youtube_probe
 
 CONTENT_MUSICVIDEOS = "musicvideos"
 YOUTUBE_PLAY_URI = "plugin://plugin.video.youtube/play/?video_id={video_id}"
 YOUTUBE_THUMB_URI = "https://img.youtube.com/vi/{video_id}/0.jpg"
+
+# Decade folder labels (keep in sync with resources/language/*/strings.xml).
+_DECADE_STRING_IDS = {
+    "1960": 30010,
+    "1970": 30011,
+    "1980": 30012,
+    "1990": 30013,
+}
 
 
 def addon_root() -> str:
@@ -30,6 +39,17 @@ def csv_dir() -> str:
 
 def set_musicvideos_content(handle: int) -> None:
     xbmcplugin.setContent(handle, CONTENT_MUSICVIDEOS)
+
+
+def decade_label(decade_id: str) -> str:
+    """Localized decade folder label (e.g. ``Años 80``); no scattered literals."""
+    string_id = _DECADE_STRING_IDS.get(decade_id)
+    if string_id is not None:
+        return kodi_i18n.localize(string_id)
+    # Fallback for unexpected decades outside the editorial arc.
+    if len(decade_id) == 4 and decade_id.isdigit():
+        return "Años {0}".format(decade_id[2:])
+    return decade_id
 
 
 def folder_listitem(label: str) -> xbmcgui.ListItem:
@@ -71,7 +91,7 @@ def build_url(base_url: str, query: Mapping[str, str]) -> str:
 
 
 def run(argv: Optional[Sequence[str]] = None) -> None:
-    """Plugin entry: list years, list a year, or resolve a song."""
+    """Plugin entry: list decades, years, songs, or resolve playback."""
     argv_list: Sequence[str] = sys.argv if argv is None else argv
     base_url = argv_list[0]
     handle = int(argv_list[1])
@@ -81,7 +101,22 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
     set_musicvideos_content(handle)
 
     if mode is None:
-        result = catalog.list_years(catalog_dir)
+        result = catalog.list_decades(catalog_dir)
+        kodi_notify.notify_catalog_errors(result.errors)
+        for decade in result.decades:
+            url = build_url(
+                base_url, {"mode": "decade", "foldername": decade.id}
+            )
+            li = folder_listitem(decade_label(decade.id))
+            xbmcplugin.addDirectoryItem(
+                handle=handle, url=url, listitem=li, isFolder=True
+            )
+        xbmcplugin.endOfDirectory(handle)
+        return
+
+    if mode[0] == "decade":
+        decade_id = args["foldername"][0]
+        result = catalog.years_in_decade(catalog_dir, decade_id)
         kodi_notify.notify_catalog_errors(result.errors)
         for year in result.years:
             url = build_url(base_url, {"mode": "year", "foldername": year.id})

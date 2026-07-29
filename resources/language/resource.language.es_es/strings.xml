@@ -6,4 +6,9 @@
     <string id="30002">Hay %d problemas en el catálogo; se muestra lo usable.</string>
     <string id="30003">Este vídeo ya no está disponible en YouTube.</string>
     <string id="30004">Este vídeo es privado o requiere iniciar sesión en YouTube.</string>
+    <!-- Decade folder labels (feature 003) -->
+    <string id="30010">Años 60</string>
+    <string id="30011">Años 70</string>
+    <string id="30012">Años 80</string>
+    <string id="30013">Años 90</string>
 </strings>

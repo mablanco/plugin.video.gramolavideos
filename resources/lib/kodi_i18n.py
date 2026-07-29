@@ -16,6 +16,10 @@ _FALLBACK = {
     30004: (
         "Este vídeo es privado o requiere iniciar sesión en YouTube."
     ),
+    30010: "Años 60",
+    30011: "Años 70",
+    30012: "Años 80",
+    30013: "Años 90",
 }
 
 

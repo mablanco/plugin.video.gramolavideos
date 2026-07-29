@@ -20,6 +20,16 @@ class Year(object):
         return "Year({0!r})".format(self.id)
 
 
+class Decade(object):
+    """Presentation grouping derived from year stems (no separate storage)."""
+
+    def __init__(self, id_: str) -> None:
+        self.id = id_
+
+    def __repr__(self) -> str:
+        return "Decade({0!r})".format(self.id)
+
+
 class MusicVideo(object):
     def __init__(self, title: str, video_id: str, year_id: str) -> None:
         self.title = title
@@ -51,11 +61,13 @@ class CatalogLoadResult(object):
     def __init__(
         self,
         years: Optional[List[Year]] = None,
+        decades: Optional[List[Decade]] = None,
         videos: Optional[List[MusicVideo]] = None,
         errors: Optional[List[CatalogError]] = None,
         ok: bool = True,
     ) -> None:
         self.years = years if years is not None else []
+        self.decades = decades if decades is not None else []
         self.videos = videos if videos is not None else []
         self.errors = errors if errors is not None else []
         self.ok = ok
@@ -114,6 +126,11 @@ def _read_year_file(
     return videos, errors
 
 
+def decade_id_for_year(year_id: str) -> str:
+    """Return decade start year as string (e.g. ``1980`` for ``1987``)."""
+    return str((int(year_id) // 10) * 10)
+
+
 def list_years(csv_dir: str) -> CatalogLoadResult:
     """List year stems under ``csv_dir`` without opening CSV contents (FR-008)."""
     errors: List[CatalogError] = []
@@ -136,6 +153,33 @@ def list_years(csv_dir: str) -> CatalogLoadResult:
         years.append(Year(stem, csv_path=os.path.join(csv_dir, filename)))
     years.sort(key=lambda y: y.id)
     return CatalogLoadResult(years=years, errors=errors, ok=True)
+
+
+def list_decades(csv_dir: str) -> CatalogLoadResult:
+    """List decades that have ≥1 year CSV; no empty decades invented."""
+    years_result = list_years(csv_dir)
+    decade_ids = sorted(
+        {decade_id_for_year(year.id) for year in years_result.years}
+    )
+    decades = [Decade(decade_id) for decade_id in decade_ids]
+    return CatalogLoadResult(
+        decades=decades, errors=list(years_result.errors), ok=True
+    )
+
+
+def years_in_decade(csv_dir: str, decade_id: str) -> CatalogLoadResult:
+    """List years in ``[decade_id, decade_id+9]`` that exist in the catalog."""
+    years_result = list_years(csv_dir)
+    start = int(decade_id)
+    end = start + 9
+    filtered = [
+        year
+        for year in years_result.years
+        if start <= int(year.id) <= end
+    ]
+    return CatalogLoadResult(
+        years=filtered, errors=list(years_result.errors), ok=True
+    )
 
 
 def load_year(csv_dir: str, year_id: str) -> CatalogLoadResult:

@@ -2,14 +2,17 @@
 
 **Feature**: `003-navegacion-videos`  
 **Date**: 2026-07-29  
-**Status**: Recomendado (pendiente validación mantenedor en implementación)
+**Status**: Aprobado para implementación (opción B)
 
 ## Veredicto
 
 Adoptar **década → año → canciones → reproducir** (opción B en
-[research.md](./research.md)).
+[research.md](./research.md) R-003), alineado con
+[contracts/decision-criteria.md](./contracts/decision-criteria.md) (C1–C5).
 
-## Criterios y puntuación (resumen)
+## Matriz C1–C5 × opciones A–C
+
+Detalle y valoraciones: [research.md](./research.md) R-002. Resumen auditable:
 
 | Opción | C1 TV | C2 pasos | C3 escala | C4 simple | C5 identidad | Resultado |
 |--------|-------|----------|-----------|-----------|--------------|-----------|
@@ -30,6 +33,12 @@ Adoptar **década → año → canciones → reproducir** (opción B en
 - Una sola década en catálogo: igual se muestra el nivel década (estructura fija).
 - Años 1960–1999 proyectados: ≤4 ítems en raíz (cumple SC-003).
 
+## Fuera de alcance
+
+- Contenido editorial de los **60/70** (feature `004-catalogo-60-70`).
+- **Búsqueda** y **favoritos** (feature `005-busqueda-favoritos`).
+- Frameworks de routing (`script.module.routing`) y colapso del nivel década.
+
 ## Gobernanza
 
 - Enmendar constitution IV: flujo **décadas → años → canciones → play**.
@@ -38,4 +47,4 @@ Adoptar **década → año → canciones → reproducir** (opción B en
 
 ## Siguiente paso
 
-`/speckit-tasks` sobre esta feature, o implementar según `tasks.md` cuando exista.
+Implementar según [tasks.md](./tasks.md) / [plan.md](./plan.md).

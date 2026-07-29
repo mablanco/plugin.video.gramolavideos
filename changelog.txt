@@ -1,3 +1,8 @@
+[B]0.4.0[/B]
+- Semilla de catálogo 60s/70s: 60 entradas en 16 años (1964–1979)
+- Runbook de contribución asistida en docs/seed-60-70.md
+- Metadatos y README actualizados al arco editorial 60–90
+
 [B]0.3.1[/B]
 - Catálogo: sustituye 25 ids YouTube privados/no disponibles (oEmbed)
 - Aviso claro si un vídeo es privado o ya no está disponible antes de reproducir

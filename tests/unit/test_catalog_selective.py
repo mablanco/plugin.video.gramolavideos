@@ -15,7 +15,10 @@ def test_list_years_does_not_open_csv_contents(csv_dir, monkeypatch):
 
     monkeypatch.setattr("builtins.open", tracking_open)
     result = catalog.list_years(csv_dir)
-    assert len(result.years) == 19
+    assert len(result.years) >= 19
+    assert len(result.years) == len(
+        [f for f in os.listdir(csv_dir) if f.endswith(".csv")]
+    )
     assert result.videos == []
     assert not any(p.endswith(".csv") for p in opened)
 

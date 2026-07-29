@@ -30,7 +30,8 @@ def test_list_years_musicvideos_content(csv_dir):
     contents = xbmcplugin.calls_named("setContent")
     assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
     adds = xbmcplugin.calls_named("addDirectoryItem")
-    assert len(adds) == 19
+    expected = len([f for f in os.listdir(csv_dir) if f.endswith(".csv")])
+    assert len(adds) == expected
     assert all(c["kwargs"]["isFolder"] for c in adds)
 
 

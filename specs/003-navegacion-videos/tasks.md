@@ -28,9 +28,9 @@
 
 **Purpose**: Confirmar artefactos de plan y registro de validación
 
-- [ ] T001 Verificar que existen `specs/003-navegacion-videos/plan.md`, `spec.md`, `research.md`, `decision.md`, `data-model.md`, `quickstart.md` y `contracts/` según `plan.md`
-- [ ] T002 [P] Crear `specs/003-navegacion-videos/validation-log.md` con tabla de pasos del `quickstart.md` (documental + pytest + smoke Kodi) y columnas Resultado / Notas / Fecha
-- [ ] T003 [P] Anotar en `specs/003-navegacion-videos/validation-log.md` el baseline actual (raíz = años planos; contrato `specs/001-auditoria-codigo/contracts/plugin-navigation.md`)
+- [X] T001 Verificar que existen `specs/003-navegacion-videos/plan.md`, `spec.md`, `research.md`, `decision.md`, `data-model.md`, `quickstart.md` y `contracts/` según `plan.md`
+- [X] T002 [P] Crear `specs/003-navegacion-videos/validation-log.md` con tabla de pasos del `quickstart.md` (documental + pytest + smoke Kodi) y columnas Resultado / Notas / Fecha
+- [X] T003 [P] Anotar en `specs/003-navegacion-videos/validation-log.md` el baseline actual (raíz = años planos; contrato `specs/001-auditoria-codigo/contracts/plugin-navigation.md`)
 
 ---
 
@@ -40,11 +40,11 @@
 
 **⚠️ CRITICAL**: No user story de implementación UI hasta completar esta fase (US1 documental puede solaparse con T004–T007)
 
-- [ ] T004 Confirmar veredicto opción B en `specs/003-navegacion-videos/decision.md` alineado con `research.md` R-003 y `contracts/decision-criteria.md` (C1–C5)
-- [ ] T005 Aplicar enmienda de flujo en `.specify/memory/constitution.md` según `specs/003-navegacion-videos/contracts/constitution-amendment-draft-iv.md` (bump 1.2.1 → 1.3.0, Sync Impact Report)
-- [ ] T006 [P] Implementar helpers puros `decade_id_for_year`, `list_decades` y `years_in_decade` en `resources/lib/catalog.py` según `specs/003-navegacion-videos/data-model.md` (sin `xbmc*`)
-- [ ] T007 [P] Añadir tests de agrupación de décadas en `tests/unit/test_catalog_decades.py` cubriendo décadas incompletas y proyección 1960–1999 sin inventar años vacíos
-- [ ] T008 Actualizar o añadir nota de supersesión en `specs/003-navegacion-videos/contracts/plugin-navigation.md` enlazando el contrato legacy 001 como histórico tras el cambio
+- [X] T004 Confirmar veredicto opción B en `specs/003-navegacion-videos/decision.md` alineado con `research.md` R-003 y `contracts/decision-criteria.md` (C1–C5)
+- [X] T005 Aplicar enmienda de flujo en `.specify/memory/constitution.md` según `specs/003-navegacion-videos/contracts/constitution-amendment-draft-iv.md` (bump 1.2.1 → 1.3.0, Sync Impact Report)
+- [X] T006 [P] Implementar helpers puros `decade_id_for_year`, `list_decades` y `years_in_decade` en `resources/lib/catalog.py` según `specs/003-navegacion-videos/data-model.md` (sin `xbmc*`)
+- [X] T007 [P] Añadir tests de agrupación de décadas en `tests/unit/test_catalog_decades.py` cubriendo décadas incompletas y proyección 1960–1999 sin inventar años vacíos
+- [X] T008 Actualizar o añadir nota de supersesión en `specs/003-navegacion-videos/contracts/plugin-navigation.md` enlazando el contrato legacy 001 como histórico tras el cambio
 
 **Checkpoint**: Constitution IV actualizada; API de décadas testeable sin Kodi
 
@@ -58,9 +58,9 @@
 
 ### Implementation for User Story 1
 
-- [ ] T009 [US1] Completar matriz C1–C5 × opciones A–C en `specs/003-navegacion-videos/decision.md` (o confirmar que `research.md` R-002/R-003 ya la cubre con enlace explícito)
-- [ ] T010 [P] [US1] Documentar fuera de alcance (contenido 60/70, búsqueda/favoritos) en `specs/003-navegacion-videos/decision.md`
-- [ ] T011 [P] [US1] Registrar en `specs/003-navegacion-videos/validation-log.md` la Parte documental del `quickstart.md` (SC-001) como PASS tras auto-revisión
+- [X] T009 [US1] Completar matriz C1–C5 × opciones A–C en `specs/003-navegacion-videos/decision.md` (o confirmar que `research.md` R-002/R-003 ya la cubre con enlace explícito)
+- [X] T010 [P] [US1] Documentar fuera de alcance (contenido 60/70, búsqueda/favoritos) en `specs/003-navegacion-videos/decision.md`
+- [X] T011 [P] [US1] Registrar en `specs/003-navegacion-videos/validation-log.md` la Parte documental del `quickstart.md` (SC-001) como PASS tras auto-revisión
 
 **Checkpoint**: MVP documental — se puede demo el “qué vamos a construir” sin código UI
 
@@ -74,12 +74,12 @@
 
 ### Implementation for User Story 2
 
-- [ ] T012 [US2] Cambiar la raíz sin `mode` en `resources/lib/kodi_plugin.py` para listar décadas vía `catalog.list_decades` y URLs `mode=decade` según `contracts/plugin-navigation.md`
-- [ ] T013 [US2] Implementar rama `mode=decade` en `resources/lib/kodi_plugin.py` listando años con `years_in_decade` y URLs `mode=year` existentes
-- [ ] T014 [P] [US2] Preservar ramas `mode=year` y `mode=song` en `resources/lib/kodi_plugin.py` sin cambiar URI YouTube ni formato CSV
-- [ ] T015 [US2] Actualizar contrato de query en `tests/unit/test_plugin_query_contract.py` para incluir `mode=decade`
-- [ ] T016 [US2] Actualizar `tests/unit/test_plugin_wiring.py` para esperar décadas en raíz (no 19 años planos) y un drill-down década→año
-- [ ] T017 [US2] Ejecutar `python -m pytest -q tests/unit/test_catalog_decades.py tests/unit/test_plugin_query_contract.py tests/unit/test_plugin_wiring.py` y anotar resultado en `specs/003-navegacion-videos/validation-log.md`
+- [X] T012 [US2] Cambiar la raíz sin `mode` en `resources/lib/kodi_plugin.py` para listar décadas vía `catalog.list_decades` y URLs `mode=decade` según `contracts/plugin-navigation.md`
+- [X] T013 [US2] Implementar rama `mode=decade` en `resources/lib/kodi_plugin.py` listando años con `years_in_decade` y URLs `mode=year` existentes
+- [X] T014 [P] [US2] Preservar ramas `mode=year` y `mode=song` en `resources/lib/kodi_plugin.py` sin cambiar URI YouTube ni formato CSV
+- [X] T015 [US2] Actualizar contrato de query en `tests/unit/test_plugin_query_contract.py` para incluir `mode=decade`
+- [X] T016 [US2] Actualizar `tests/unit/test_plugin_wiring.py` para esperar décadas en raíz (no 19 años planos) y un drill-down década→año
+- [X] T017 [US2] Ejecutar `python -m pytest -q tests/unit/test_catalog_decades.py tests/unit/test_plugin_query_contract.py tests/unit/test_plugin_wiring.py` y anotar resultado en `specs/003-navegacion-videos/validation-log.md`
 
 **Checkpoint**: Navegación usable en tests; listo para smoke Kodi
 
@@ -93,11 +93,11 @@
 
 ### Implementation for User Story 3
 
-- [ ] T018 [P] [US3] Añadir strings de décadas (`Años 60`… / equivalentes EN) en `resources/language/resource.language.es_es/strings.xml`
-- [ ] T019 [P] [US3] Añadir las mismas claves en `resources/language/resource.language.en_gb/strings.xml`
-- [ ] T020 [US3] Usar `xbmcaddon`/helper de localize existente en `resources/lib/kodi_plugin.py` para etiquetas de carpeta década (sin literales nuevos dispersos)
-- [ ] T021 [US3] Verificar en comentario de prueba o assert de wiring que `folder_listitem` de década/año mantiene `isFolder=True` para pila atrás nativa de Kodi en `tests/unit/test_plugin_wiring.py`
-- [ ] T022 [US3] Documentar recorrido atrás en `specs/003-navegacion-videos/validation-log.md` (smoke o checklist manual)
+- [X] T018 [P] [US3] Añadir strings de décadas (`Años 60`… / equivalentes EN) en `resources/language/resource.language.es_es/strings.xml`
+- [X] T019 [P] [US3] Añadir las mismas claves en `resources/language/resource.language.en_gb/strings.xml`
+- [X] T020 [US3] Usar `xbmcaddon`/helper de localize existente en `resources/lib/kodi_plugin.py` para etiquetas de carpeta década (sin literales nuevos dispersos)
+- [X] T021 [US3] Verificar en comentario de prueba o assert de wiring que `folder_listitem` de década/año mantiene `isFolder=True` para pila atrás nativa de Kodi en `tests/unit/test_plugin_wiring.py`
+- [X] T022 [US3] Documentar recorrido atrás en `specs/003-navegacion-videos/validation-log.md` (smoke o checklist manual)
 
 **Checkpoint**: Orientación y atrás validados
 
@@ -111,9 +111,9 @@
 
 ### Implementation for User Story 4
 
-- [ ] T023 [P] [US4] Confirmar que ningún task ha modificado filas en `resources/csv/` por esta feature; anotar en `specs/003-navegacion-videos/validation-log.md`
-- [ ] T024 [P] [US4] Añadir test de cobertura SC-004 en `tests/unit/test_catalog_decades.py`: todo stem de `list_years` pertenece a exactamente una década listada
-- [ ] T025 [US4] Confirmar URI `plugin://plugin.video.youtube/play/?video_id=` intacta en `resources/lib/kodi_plugin.py` y dependencia en `addon.xml`
+- [X] T023 [P] [US4] Confirmar que ningún task ha modificado filas en `resources/csv/` por esta feature; anotar en `specs/003-navegacion-videos/validation-log.md`
+- [X] T024 [P] [US4] Añadir test de cobertura SC-004 en `tests/unit/test_catalog_decades.py`: todo stem de `list_years` pertenece a exactamente una década listada
+- [X] T025 [US4] Confirmar URI `plugin://plugin.video.youtube/play/?video_id=` intacta en `resources/lib/kodi_plugin.py` y dependencia en `addon.xml`
 
 **Checkpoint**: Invariantes de producto preservados
 
@@ -123,13 +123,13 @@
 
 **Purpose**: Docs de producto, versión y smoke final
 
-- [ ] T026 [P] Actualizar flujo de usuario en `README.md` (décadas → años → canciones)
-- [ ] T027 [P] Actualizar descripción/summary en `addon.xml` si menciona solo listado de años planos
-- [ ] T028 Bump de versión en `addon.xml` y entrada en `changelog.txt` por cambio de navegación
-- [ ] T029 [P] Actualizar referencia legacy en `specs/001-auditoria-codigo/contracts/plugin-navigation.md` con nota “superseded by 003” (sin borrar historia)
-- [ ] T030 Ejecutar smoke Kodi del `specs/003-navegacion-videos/quickstart.md` y completar `validation-log.md` (SC-003, SC-005)
-- [ ] T031 [P] Confirmar que `.gitignore` sigue bloqueando secretos/artefactos IA y que el diff de esta feature no los introduce (constitution IX)
-- [ ] T032 Ejecutar `python -m pytest -q` completo y anotar PASS en `specs/003-navegacion-videos/validation-log.md`
+- [X] T026 [P] Actualizar flujo de usuario en `README.md` (décadas → años → canciones)
+- [X] T027 [P] Actualizar descripción/summary en `addon.xml` si menciona solo listado de años planos
+- [X] T028 Bump de versión en `addon.xml` y entrada en `changelog.txt` por cambio de navegación
+- [X] T029 [P] Actualizar referencia legacy en `specs/001-auditoria-codigo/contracts/plugin-navigation.md` con nota “superseded by 003” (sin borrar historia)
+- [X] T030 Ejecutar smoke Kodi del `specs/003-navegacion-videos/quickstart.md` y completar `validation-log.md` (SC-003, SC-005)
+- [X] T031 [P] Confirmar que `.gitignore` sigue bloqueando secretos/artefactos IA y que el diff de esta feature no los introduce (constitution IX)
+- [X] T032 Ejecutar `python -m pytest -q` completo y anotar PASS en `specs/003-navegacion-videos/validation-log.md`
 
 ---
 

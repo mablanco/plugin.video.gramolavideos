@@ -40,3 +40,4 @@
 ## Notes
 
 - Items marked incomplete require spec updates before `/speckit-clarify` or `/speckit-plan`
+- **Cierre 005 (2026-07-29):** validación documental PASS — ver [validation-log.md](../validation-log.md) (SC-001–SC-005). Siguiente: `/speckit-specify` vía [handoff-favoritos.md](../handoff-favoritos.md).

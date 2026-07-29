@@ -4,7 +4,7 @@
 
 **Created**: 2026-07-29
 
-**Status**: Draft
+**Status**: Decision complete
 
 **Input**: User description: "búsqueda/favoritos, decidiendo si deben ser una o dos features diferentes"
 

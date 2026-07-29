@@ -4,6 +4,8 @@
 **Date**: 2026-07-29
 
 Modelo para el **análisis**; no implica schema implementado en esta feature.
+Perfiles alineados con las secciones US2/US3 de [decision.md](./decision.md)
+(revisión 2026-07-29).
 
 ## Entities
 

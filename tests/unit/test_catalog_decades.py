@@ -12,10 +12,10 @@ def test_decade_id_for_year():
     assert catalog.decade_id_for_year("1960") == "1960"
 
 
-def test_list_decades_repo_has_1980_and_1990(csv_dir):
+def test_list_decades_repo_has_1960_through_1990(csv_dir):
     result = catalog.list_decades(csv_dir)
     ids = [d.id for d in result.decades]
-    assert ids == ["1980", "1990"]
+    assert ids == ["1960", "1970", "1980", "1990"]
     assert len(ids) <= 12
 
 

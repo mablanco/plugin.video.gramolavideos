@@ -2,7 +2,7 @@
 
 ## Introducción
 
-Addon para Kodi que muestra una colección de vídeos musicales encontrados en YouTube de artistas y bandas españolas de los años **80 y 90** (años de catálogo 1980–1999; sin 1994). La ampliación a los 60 y 70 queda como trabajo de contenido futuro, no como promesa del listado actual.
+Addon para Kodi que muestra una colección de vídeos musicales encontrados en YouTube de artistas y bandas españolas de los años **60, 70, 80 y 90** (años de catálogo con semilla 1964–1979 más 1980–1999; sin 1994). El proceso para ampliar la semilla 60/70 está en [docs/seed-60-70.md](docs/seed-60-70.md).
 
 Este es un proyecto **ya existente** (desarrollado y publicado históricamente de forma manual). En esta etapa se está **integrando el uso de IA** en el flujo de desarrollo (asistencia de código, Speckit/constitution, etc.) para modernizar y mantener el addon sin reescribir su propósito. La gobernanza para ese trabajo vive en `.specify/memory/constitution.md`. El `.gitignore` del repositorio está preparado para evitar filtrar secretos, credenciales y artefactos locales de herramientas de IA.
 
@@ -16,7 +16,7 @@ Este addon depende del plugin de YouTube, que debería instalarse automáticamen
 
 ## Uso
 
-"La Gramola de Vídeos" es accesible desde el menú de addons de vídeo de Kodi. Una vez abierto, muestra **décadas** con catálogo (p. ej. Años 80, Años 90); al entrar en una década aparecen los **años** con CSV; cada año lista las **canciones** que se reproducen vía YouTube.
+"La Gramola de Vídeos" es accesible desde el menú de addons de vídeo de Kodi. Una vez abierto, muestra **décadas** con catálogo (Años 60–90); al entrar en una década aparecen los **años** con CSV; cada año lista las **canciones** que se reproducen vía YouTube.
 
 ## Desarrollo y tests
 
@@ -35,13 +35,13 @@ La rama por defecto del repositorio es **`main`**. El trabajo se hace en ramas f
 
 **¿Está disponible este addon en un repositorio de Kodi?** No, pero puede que en el futuro. Si alguien quiere echar una mano en el proceso, estaré encantado de recibir su ayuda.
 
-**¿Puedo añadir más vídeos? ¿Cómo?** Sí, es completamente posible. Basta con editar los ficheros CSV incluidos en el código del addon en la ruta `resources/csv`. En cada fila hay dos campos, el nombre del vídeo (formato: artista - canción) y el código de YouTube del mismo. Cada campo debe estar separado por un punto y coma (;).
+**¿Puedo añadir más vídeos? ¿Cómo?** Sí. Edita (o crea) un fichero `resources/csv/YYYY.csv`. Cada fila tiene dos campos separados por `;`: título (`Artista - Canción`) e id de YouTube. Cronometrado en seco: añadir una fila válida suele llevar menos de 5 minutos. Para regenerar o ampliar la **semilla 60/70** de forma asistida, sigue [docs/seed-60-70.md](docs/seed-60-70.md) y el contrato [specs/004-catalogo-60-70/contracts/seed-process.md](specs/004-catalogo-60-70/contracts/seed-process.md) (solo en el host; nunca en runtime Kodi).
 
 **¿Por qué un vídeo no se reproduce?** Suele ser porque el id de YouTube es privado, se retiró o YouTube exige iniciar sesión. La gramola muestra un aviso en esos casos; conviene sustituir el id en el CSV por uno público del mismo tema.
 
 ## TODO
 
-- Añadir más vídeos musicales (¿alguien se anima?), en particular de los 60 y 70 si se quiere ampliar el arco editorial.
+- Seguir ampliando el catálogo (más filas 60–90) siguiendo el FAQ / runbook de semilla.
 - Opcional: rellenar el hueco de 1994 si aparece material adecuado.
 
 El listado de décadas/años solo descubre los ficheros `YYYY.csv` (sin leer su contenido); al abrir un año se carga únicamente ese CSV.

@@ -40,16 +40,16 @@ def test_root_lists_decades_not_flat_years(csv_dir):
     contents = xbmcplugin.calls_named("setContent")
     assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
     adds = xbmcplugin.calls_named("addDirectoryItem")
-    # Repo has 1980s + 1990s only — not 19 flat years
-    assert len(adds) == 2
+    # Seed 60/70 + legacy 80/90 → four decades (not flat year list)
+    assert len(adds) == 4
     assert len(adds) <= 12
     assert all(c["kwargs"]["isFolder"] is True for c in adds)
     labels = [c["kwargs"]["listitem"].getLabel() for c in adds]
-    assert labels == ["Años 80", "Años 90"]
+    assert labels == ["Años 60", "Años 70", "Años 80", "Años 90"]
     for call in adds:
         qs = parse_qs(urlparse(call["kwargs"]["url"]).query)
         assert qs["mode"] == ["decade"]
-        assert qs["foldername"][0] in ("1980", "1990")
+        assert qs["foldername"][0] in ("1960", "1970", "1980", "1990")
 
 
 def test_decade_drill_down_to_years():

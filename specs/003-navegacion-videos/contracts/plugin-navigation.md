@@ -1,7 +1,9 @@
 # Contract: Navegación del plugin (v2 — décadas)
 
 **Feature**: `003-navegacion-videos`  
-**Supersedes (en runtime tras implementar)**: `specs/001-auditoria-codigo/contracts/plugin-navigation.md` para el nivel raíz.
+**Supersedes (runtime)**: `specs/001-auditoria-codigo/contracts/plugin-navigation.md`
+para el nivel raíz y el parámetro `mode=decade`. El contrato 001 permanece como
+**histórico** de la navegación plana años→canciones; no borrarlo.
 
 ## Flujo
 

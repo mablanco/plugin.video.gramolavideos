@@ -1,14 +1,17 @@
 <!--
 Sync Impact Report
-- Version change: 1.2.0 → 1.2.1
-- Modified principles: none
+- Version change: 1.2.1 → 1.3.0
+- Modified principles:
+  - IV. Simplicidad del plugin: flujo años→canciones→play → décadas→años→canciones→play
+    (décadas derivadas del catálogo CSV por año; año sigue siendo unidad de datos)
 - Added / clarified:
-  - Seguridad del repositorio: split Speckit project state vs regenerable tooling;
-    ignore `.specify/feature.json`
+  - Restricciones técnicas: listados coherentes con flujo décadas→años→canciones
 - Removed sections: none
 - Templates requiring updates:
-  - .gitignore ✅ updated
+  - README.md (flujo de uso) — con feature 003
+  - specs/003 contracts/plugin-navigation.md — contrato v2
 - Follow-up TODOs: none
+- Prior (1.2.0 → 1.2.1): Speckit project state vs regenerable tooling; ignore feature.json
 -->
 
 # La Gramola de Videos Constitution
@@ -39,11 +42,15 @@ cambio. Rationale: la identidad del producto es esa colección, no un jukebox
 genérico.
 
 ### IV. Simplicidad del plugin
-El addon MUST preservar el flujo de usuario años → canciones → reproducción.
-Nuevas capas, frameworks o abstracciones MUST justificarse en Complexity Tracking
-del plan. La evolución del código MAY introducir módulos, pero MUST NOT
-complicar el producto más allá de lo necesario (YAGNI). Rationale: el addon
-nació deliberadamente pequeño; la modernización no debe hinchar el alcance.
+El addon MUST preservar el flujo de usuario **décadas → años → canciones →
+reproducción**, donde las décadas se derivan de los años presentes en el
+catálogo (CSV por año) y no sustituyen al año como unidad de datos. Nuevas
+capas, frameworks o abstracciones MUST justificarse en Complexity Tracking del
+plan. La evolución del código MAY introducir módulos, pero MUST NOT complicar
+el producto más allá de lo necesario (YAGNI). Rationale: el listado plano de
+años no escala al arco editorial 60s–90s; un único nivel de agrupación por
+década mantiene la identidad cronológica sin añadir búsqueda ni taxonomías
+paralelas.
 
 ### V. Metadatos y versionado del addon
 El id del addon MUST permanecer `plugin.video.gramolavideos`. Cambios de
@@ -128,7 +135,7 @@ requerimiento inmediato de cada cambio.
 - Stack permitido: runtime Python de Kodi + addons/módulos declarados en
   `requires`; MUST NOT añadir dependencias binarias no soportadas por Kodi.
 - Listados de directorio MUST usar las APIs de plugin de Kodi de forma
-  coherente con el flujo años → canciones.
+  coherente con el flujo décadas → años → canciones.
 
 ## Flujo de contribución de contenido
 
@@ -178,4 +185,4 @@ se toque arquitectura, ausencia de secretos en el diff, idioma/i18n cuando
 aplique, y complejidad justificada. Guidance operativa: `README.md` y esta
 constitution.
 
-**Version**: 1.2.1 | **Ratified**: 2026-07-25 | **Last Amended**: 2026-07-25
+**Version**: 1.3.0 | **Ratified**: 2026-07-25 | **Last Amended**: 2026-07-29

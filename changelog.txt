@@ -1,3 +1,7 @@
+[B]0.3.2[/B]
+- Navegación: raíz por décadas (Años 80 / Años 90) → años → canciones
+- Etiquetas de década localizables (es/en); CSV y reproducción YouTube sin cambio
+
 [B]0.3.1[/B]
 - Catálogo: sustituye 25 ids YouTube privados/no disponibles (oEmbed)
 - Aviso claro si un vídeo es privado o ya no está disponible antes de reproducir

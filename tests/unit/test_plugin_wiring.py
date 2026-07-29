@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
-"""Plugin wiring against xbmc* stubs — desired US1 behavior (T026).
+"""Plugin wiring against xbmc* stubs — decade navigation (feature 003).
 
 Former LEGACY_FREEZE play/content/thumb assertions replaced after Matrix+ work.
+Root lists decades (not flat years); decade/year folders keep isFolder=True for
+Kodi native back stack.
 """
 import importlib
 import os
 import sys
+from urllib.parse import parse_qs, urlparse
 
 import xbmc
 import xbmcaddon
@@ -19,26 +22,53 @@ def _run_addon(query):
         "1",
         "?" + query if query is not None else "?",
     ]
-    for name in ("addon", "kodi_plugin", "kodi_notify", "kodi_i18n", "catalog", "youtube_probe"):
+    for name in (
+        "addon",
+        "kodi_plugin",
+        "kodi_notify",
+        "kodi_i18n",
+        "catalog",
+        "youtube_probe",
+    ):
         if name in sys.modules:
             del sys.modules[name]
     return importlib.import_module("addon")
 
 
-def test_list_years_musicvideos_content(csv_dir):
+def test_root_lists_decades_not_flat_years(csv_dir):
     _run_addon("")
     contents = xbmcplugin.calls_named("setContent")
     assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
     adds = xbmcplugin.calls_named("addDirectoryItem")
-    assert len(adds) == 19
-    assert all(c["kwargs"]["isFolder"] for c in adds)
+    # Repo has 1980s + 1990s only — not 19 flat years
+    assert len(adds) == 2
+    assert len(adds) <= 12
+    assert all(c["kwargs"]["isFolder"] is True for c in adds)
+    labels = [c["kwargs"]["listitem"].getLabel() for c in adds]
+    assert labels == ["Años 80", "Años 90"]
+    for call in adds:
+        qs = parse_qs(urlparse(call["kwargs"]["url"]).query)
+        assert qs["mode"] == ["decade"]
+        assert qs["foldername"][0] in ("1980", "1990")
+
+
+def test_decade_drill_down_to_years():
+    _run_addon("mode=decade&foldername=1980")
+    adds = xbmcplugin.calls_named("addDirectoryItem")
+    assert len(adds) == 10
+    assert all(c["kwargs"]["isFolder"] is True for c in adds)
+    years = [c["kwargs"]["listitem"].getLabel() for c in adds]
+    assert years == [str(y) for y in range(1980, 1990)]
+    for call in adds:
+        qs = parse_qs(urlparse(call["kwargs"]["url"]).query)
+        assert qs["mode"] == ["year"]
 
 
 def test_list_year_songs_use_https_thumbs():
     _run_addon("mode=year&foldername=1991")
     adds = xbmcplugin.calls_named("addDirectoryItem")
     assert len(adds) >= 1
-    assert all(not c["kwargs"]["isFolder"] for c in adds)
+    assert all(not c["kwargs"].get("isFolder") for c in adds)
     for call in adds:
         li = call["kwargs"]["listitem"]
         thumb = (li._art or {}).get("thumb", "")

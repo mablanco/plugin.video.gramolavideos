@@ -22,6 +22,9 @@ class ListItem(object):
         self._info = {}
         self._properties = {}
 
+    def getLabel(self):
+        return self.label
+
     def setArt(self, art):
         self._art.update(art or {})
 

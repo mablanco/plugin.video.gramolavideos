@@ -6,4 +6,9 @@
     <string id="30002">There are %d catalog problems; usable items are still shown.</string>
     <string id="30003">This video is no longer available on YouTube.</string>
     <string id="30004">This video is private or requires signing in to YouTube.</string>
+    <!-- Decade folder labels (feature 003) -->
+    <string id="30010">1960s</string>
+    <string id="30011">1970s</string>
+    <string id="30012">1980s</string>
+    <string id="30013">1990s</string>
 </strings>

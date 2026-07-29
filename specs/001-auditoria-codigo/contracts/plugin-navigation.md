@@ -1,11 +1,15 @@
 # Contract: Navegación del plugin (UI / query)
 
 **Feature**: `001-auditoria-codigo`  
-**Audience**: capa `resources/lib/kodi_*.py` + `addon.py`
+**Audience**: capa `resources/lib/kodi_*.py` + `addon.py`  
+**Status**: **Histórico** — superseded by
+`specs/003-navegacion-videos/contracts/plugin-navigation.md` (raíz = décadas,
+`mode=decade`). Conservar este documento como baseline de la navegación plana.
 
 ## Flujo
 
-Preservar constitution IV / FR-001:
+Preservar constitution IV / FR-001 *(texto de 001; el runtime actual sigue el
+contrato 003)*:
 
 1. Sin `mode` (o `mode` ausente): listar años (directorios).
 2. `mode=year` + `foldername=<YYYY>`: listar canciones del año (items reproducibles).

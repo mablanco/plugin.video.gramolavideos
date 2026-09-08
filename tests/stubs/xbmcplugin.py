@@ -48,6 +48,10 @@ def setContent(handle, content):
     _record("setContent", handle=handle, content=content)
 
 
+def setPluginCategory(handle, category):
+    _record("setPluginCategory", handle=handle, category=category)
+
+
 def get_calls():
     return list(_calls)
 

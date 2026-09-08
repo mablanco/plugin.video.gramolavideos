@@ -1,0 +1,35 @@
+---
+description: Contexto durable del repo La Gramola de Videos (Speckit / workspace)
+alwaysApply: true
+---
+
+# Contexto del proyecto
+
+## Repo canónico
+
+- Este directorio (`plugin.video.gramolavideos`) es el **addon funcional y canónico**.
+- En el workspace padre puede existir `plugin.video.gramola`: es un **scaffold vacío**
+  (plantilla Kodi moderna sin catálogo). **No** usarlo como base de trabajo salvo
+  que el mantenedor lo pida explícitamente.
+- Gobernanza: `.specify/memory/constitution.md` (prevalece sobre hábitos ad hoc).
+- Onboarding humano / IA: `README.md`.
+
+## Qué versionar vs regenerar (Speckit)
+
+- **Versionar**: `memory/`, `templates/`, `extensions.yml`, `init-options.json`,
+  `integration.json`, `.cursor/rules/`, `specs/`, `.gitignore`.
+- **No versionar** (regenerable con `specify init` / extensiones): `.cursor/skills/`,
+  `.specify/scripts/`, `workflows/`, `integrations/`, `extensions/`,
+  `.specify/feature.json` (puntero de sesión).
+
+## Idioma
+
+- Comunicación y docs de producto: **español**.
+- Objetivo futuro de UI: multiidioma con **inglés** en pantalla (ver constitution X).
+
+## Producto (resumen)
+
+- Addon Kodi de vídeos musicales españoles (~60s–90s), catálogo en
+  `resources/csv/YYYY.csv` (`Artista - Canción;youtube_id`).
+- Reproducción vía `plugin.video.youtube`; no rehostear medios.
+- Flujo UI (constitution IV): décadas → años → canciones → play.

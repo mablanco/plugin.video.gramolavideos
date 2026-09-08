@@ -38,6 +38,9 @@ STRING_FAV_ADDED = 30024
 STRING_FAV_REMOVED = 30025
 STRING_FAV_SAVE_ERROR = 30026
 STRING_FAV_ORPHAN = 30027
+STRING_SEARCH = 30030
+STRING_SEARCH_HEADING = 30031
+STRING_SEARCH_EMPTY = 30032
 
 
 def addon_root() -> str:
@@ -65,6 +68,7 @@ def decade_label(decade_id: str) -> str:
     string_id = _DECADE_STRING_IDS.get(decade_id)
     if string_id is not None:
         return kodi_i18n.localize(string_id)
+    # Fallback for unexpected decades outside the editorial arc.
     if len(decade_id) == 4 and decade_id.isdigit():
         return "Años {0}".format(decade_id[2:])
     return decade_id
@@ -86,6 +90,11 @@ def song_listitem(title: str, video_id: str) -> xbmcgui.ListItem:
         pass
     li.setProperty("IsPlayable", "true")
     return li
+
+
+def search_result_label(title: str, year_id: str) -> str:
+    """Editorial title with year as light context (not a CSV rewrite)."""
+    return "{0} ({1})".format(title, year_id)
 
 
 def resolve_youtube_playback(handle: int, video_id: str) -> str:
@@ -147,8 +156,37 @@ def _notify(message_id: int) -> None:
     kodi_notify.notify_message(kodi_i18n.localize(message_id))
 
 
+def _render_search_results(
+    handle: int,
+    base_url: str,
+    catalog_dir: str,
+    store_path: str,
+    query: str,
+) -> None:
+    result = catalog.search(catalog_dir, query, limit=100)
+    kodi_notify.notify_catalog_errors(result.errors)
+    if not result.videos:
+        _notify(STRING_SEARCH_EMPTY)
+    for video in result.videos:
+        url = build_url(
+            base_url, {"mode": "song", "foldername": video.video_id}
+        )
+        label = search_result_label(video.title, video.year_id)
+        li = song_listitem(label, video.video_id)
+        _attach_favorite_context(
+            li,
+            base_url,
+            video.year_id,
+            video.video_id,
+            video.title,
+            store_path,
+        )
+        xbmcplugin.addDirectoryItem(handle=handle, url=url, listitem=li)
+    xbmcplugin.endOfDirectory(handle)
+
+
 def run(argv: Optional[Sequence[str]] = None) -> None:
-    """Plugin entry: decades, favorites, years, songs, playback."""
+    """Plugin entry: decades, favorites, search, years, songs, playback."""
     argv_list: Sequence[str] = sys.argv if argv is None else argv
     base_url = argv_list[0]
     handle = int(argv_list[1])
@@ -159,11 +197,19 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
     set_musicvideos_content(handle)
 
     if mode is None:
+        # Root: Favoritos + Buscar + decades (browse cronológico intacto).
         fav_url = build_url(base_url, {"mode": "favorites"})
         xbmcplugin.addDirectoryItem(
             handle=handle,
             url=fav_url,
             listitem=folder_listitem(kodi_i18n.localize(STRING_FAVORITES)),
+            isFolder=True,
+        )
+        search_url = build_url(base_url, {"mode": "search"})
+        xbmcplugin.addDirectoryItem(
+            handle=handle,
+            url=search_url,
+            listitem=folder_listitem(kodi_i18n.localize(STRING_SEARCH)),
             isFolder=True,
         )
         result = catalog.list_decades(catalog_dir)
@@ -228,6 +274,26 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
             _notify(STRING_FAV_REMOVED)
         else:
             _notify(STRING_FAV_SAVE_ERROR)
+        return
+
+    if mode[0] == "search":
+        query = xbmcgui.Dialog().input(kodi_i18n.localize(STRING_SEARCH_HEADING))
+        if query is None or not str(query).strip():
+            xbmcplugin.endOfDirectory(handle, succeeded=True)
+            return
+        _render_search_results(
+            handle, base_url, catalog_dir, store_path, str(query).strip()
+        )
+        return
+
+    if mode[0] == "search_results":
+        query = args.get("q", [""])[0]
+        if not str(query).strip():
+            xbmcplugin.endOfDirectory(handle, succeeded=True)
+            return
+        _render_search_results(
+            handle, base_url, catalog_dir, store_path, str(query).strip()
+        )
         return
 
     if mode[0] == "decade":

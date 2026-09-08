@@ -20,4 +20,8 @@
     <string id="30025">Removed from favorites.</string>
     <string id="30026">Could not save the favorite.</string>
     <string id="30027">This favorite is no longer in the catalog.</string>
+    <!-- Search (feature 007) -->
+    <string id="30030">Search</string>
+    <string id="30031">Search the catalog</string>
+    <string id="30032">No matches.</string>
 </strings>

@@ -20,4 +20,8 @@
     <string id="30025">Quitado de favoritos.</string>
     <string id="30026">No se pudo guardar el favorito.</string>
     <string id="30027">Este favorito ya no está en el catálogo.</string>
+    <!-- Búsqueda (feature 007) -->
+    <string id="30030">Buscar</string>
+    <string id="30031">Buscar en el catálogo</string>
+    <string id="30032">Sin coincidencias.</string>
 </strings>

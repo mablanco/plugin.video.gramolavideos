@@ -1,3 +1,8 @@
+[B]0.5.0[/B]
+- Favoritos locales por perfil (añadir/quitar, persistencia, huérfanos ocultos)
+- Búsqueda local por artista/título desde la raíz (hasta 100 resultados)
+- Año visible como categoría Kodi al listar canciones de un año
+
 [B]0.4.0[/B]
 - Semilla de catálogo 60s/70s: ~60 entradas en 16 años (1964–1979)
 - Runbook de contribución asistida en docs/seed-60-70.md

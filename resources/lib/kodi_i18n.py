@@ -28,6 +28,9 @@ _FALLBACK = {
     30025: "Quitado de favoritos.",
     30026: "No se pudo guardar el favorito.",
     30027: "Este favorito ya no está en el catálogo.",
+    30030: "Buscar",
+    30031: "Buscar en el catálogo",
+    30032: "Sin coincidencias.",
 }
 
 

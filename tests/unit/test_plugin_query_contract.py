@@ -4,7 +4,7 @@ import pytest
 
 pytestmark = pytest.mark.legacy_freeze
 
-# Contract snapshot — keep in sync with plugin navigation (003+006)
+# Contract snapshot — keep in sync with plugin navigation contracts (003+006+007)
 MODES = {
     None,
     "decade",
@@ -13,6 +13,8 @@ MODES = {
     "favorites",
     "favorite_add",
     "favorite_remove",
+    "search",
+    "search_results",
 }
 FOLDERNAME_FOR = {
     None: None,  # unused when listing decades
@@ -31,6 +33,8 @@ def test_mode_values_documented():
         "favorites",
         "favorite_add",
         "favorite_remove",
+        "search",
+        "search_results",
     }
 
 

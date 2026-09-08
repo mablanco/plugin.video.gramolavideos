@@ -36,24 +36,43 @@ def _run_addon(query):
     return importlib.import_module("addon")
 
 
-def test_root_lists_favorites_and_decades(csv_dir):
+def test_root_lists_favorites_search_and_decades(csv_dir):
     _run_addon("")
     contents = xbmcplugin.calls_named("setContent")
     assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
     adds = xbmcplugin.calls_named("addDirectoryItem")
-    # Favoritos + 4 decades
-    assert len(adds) == 5
+    # Favoritos + Buscar + 4 decades
+    assert len(adds) == 6
     assert len(adds) <= 12
     assert all(c["kwargs"]["isFolder"] is True for c in adds)
     labels = [c["kwargs"]["listitem"].getLabel() for c in adds]
     assert labels[0] == "Favoritos"
-    assert labels[1:] == ["Años 60", "Años 70", "Años 80", "Años 90"]
-    qs0 = parse_qs(urlparse(adds[0]["kwargs"]["url"]).query)
-    assert qs0["mode"] == ["favorites"]
-    for call in adds[1:]:
+    assert labels[1] == "Buscar"
+    assert labels[2:] == ["Años 60", "Años 70", "Años 80", "Años 90"]
+    root_modes = [
+        parse_qs(urlparse(c["kwargs"]["url"]).query)["mode"][0] for c in adds
+    ]
+    assert root_modes[:2] == ["favorites", "search"]
+    for call in adds[2:]:
         qs = parse_qs(urlparse(call["kwargs"]["url"]).query)
         assert qs["mode"] == ["decade"]
         assert qs["foldername"][0] in ("1960", "1970", "1980", "1990")
+
+
+def test_year_sets_plugin_category():
+    _run_addon("mode=year&foldername=1985")
+    categories = xbmcplugin.calls_named("setPluginCategory")
+    assert len(categories) == 1
+    assert categories[0]["kwargs"]["handle"] == 1
+    assert categories[0]["kwargs"]["category"] == "1985"
+
+
+def test_year_category_changes_per_year():
+    _run_addon("mode=year&foldername=1980")
+    assert xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"] == "1980"
+    xbmcplugin.reset()
+    _run_addon("mode=year&foldername=1985")
+    assert xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"] == "1985"
 
 
 def test_decade_drill_down_to_years():
@@ -78,28 +97,6 @@ def test_list_year_songs_use_https_thumbs():
         thumb = (li._art or {}).get("thumb", "")
         assert thumb.startswith("https://img.youtube.com/vi/")
         assert li._properties.get("IsPlayable") == "true"
-
-
-def test_year_sets_plugin_category():
-    _run_addon("mode=year&foldername=1985")
-    categories = xbmcplugin.calls_named("setPluginCategory")
-    assert len(categories) == 1
-    assert categories[0]["kwargs"]["handle"] == 1
-    assert categories[0]["kwargs"]["category"] == "1985"
-
-
-def test_year_category_changes_per_year():
-    _run_addon("mode=year&foldername=1980")
-    assert (
-        xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"]
-        == "1980"
-    )
-    xbmcplugin.reset()
-    _run_addon("mode=year&foldername=1985")
-    assert (
-        xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"]
-        == "1985"
-    )
 
 
 def test_play_song_uses_set_resolved_url(monkeypatch):

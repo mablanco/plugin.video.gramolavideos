@@ -220,3 +220,34 @@ def load_year(csv_dir: str, year_id: str) -> CatalogLoadResult:
 
     errors.extend(row_errors)
     return CatalogLoadResult(videos=videos, errors=errors, ok=True)
+
+
+def search(
+    csv_dir: str, query: str, limit: int = 100
+) -> CatalogLoadResult:
+    """Case-insensitive substring search over local catalog titles.
+
+    Empty/whitespace query returns no videos and does not open CSV files.
+    Results are sorted then capped at ``min(limit, 100)``.
+    """
+    effective_limit = 100 if limit is None else min(max(int(limit), 0), 100)
+    normalized = (query or "").strip().casefold()
+    if not normalized:
+        return CatalogLoadResult(videos=[], errors=[], ok=True)
+
+    years_result = list_years(csv_dir)
+    errors: List[CatalogError] = list(years_result.errors)
+    matches: List[MusicVideo] = []
+    for year in years_result.years:
+        year_result = load_year(csv_dir, year.id)
+        errors.extend(year_result.errors)
+        for video in year_result.videos:
+            if normalized in video.title.casefold():
+                matches.append(video)
+
+    matches.sort(
+        key=lambda v: (v.title.casefold(), v.year_id, v.video_id)
+    )
+    return CatalogLoadResult(
+        videos=matches[:effective_limit], errors=errors, ok=True
+    )

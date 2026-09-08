@@ -129,6 +129,7 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
 
     if mode[0] == "year":
         year_id = args["foldername"][0]
+        xbmcplugin.setPluginCategory(handle, year_id)
         result = catalog.load_year(catalog_dir, year_id)
         kodi_notify.notify_catalog_errors(result.errors)
         for video in result.videos:

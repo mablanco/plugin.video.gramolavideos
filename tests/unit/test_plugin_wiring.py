@@ -76,6 +76,28 @@ def test_list_year_songs_use_https_thumbs():
         assert li._properties.get("IsPlayable") == "true"
 
 
+def test_year_sets_plugin_category():
+    _run_addon("mode=year&foldername=1985")
+    categories = xbmcplugin.calls_named("setPluginCategory")
+    assert len(categories) == 1
+    assert categories[0]["kwargs"]["handle"] == 1
+    assert categories[0]["kwargs"]["category"] == "1985"
+
+
+def test_year_category_changes_per_year():
+    _run_addon("mode=year&foldername=1980")
+    assert (
+        xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"]
+        == "1980"
+    )
+    xbmcplugin.reset()
+    _run_addon("mode=year&foldername=1985")
+    assert (
+        xbmcplugin.calls_named("setPluginCategory")[0]["kwargs"]["category"]
+        == "1985"
+    )
+
+
 def test_play_song_uses_set_resolved_url(monkeypatch):
     import kodi_plugin
     import youtube_probe

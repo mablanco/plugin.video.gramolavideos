@@ -11,4 +11,13 @@
     <string id="30011">Años 70</string>
     <string id="30012">Años 80</string>
     <string id="30013">Años 90</string>
+    <!-- Favoritos (feature 006) -->
+    <string id="30020">Favoritos</string>
+    <string id="30021">Añadir a favoritos</string>
+    <string id="30022">Quitar de favoritos</string>
+    <string id="30023">No hay favoritos todavía.</string>
+    <string id="30024">Añadido a favoritos.</string>
+    <string id="30025">Quitado de favoritos.</string>
+    <string id="30026">No se pudo guardar el favorito.</string>
+    <string id="30027">Este favorito ya no está en el catálogo.</string>
 </strings>

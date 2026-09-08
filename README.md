@@ -16,7 +16,10 @@ Este addon depende del plugin de YouTube, que debería instalarse automáticamen
 
 ## Uso
 
-"La Gramola de Vídeos" es accesible desde el menú de addons de vídeo de Kodi. Una vez abierto, muestra **décadas** con catálogo (Años 60–90); al entrar en una década aparecen los **años** con CSV; cada año lista las **canciones** que se reproducen vía YouTube.
+"La Gramola de Vídeos" es accesible desde el menú de addons de vídeo de Kodi. Una vez abierto, la raíz muestra **Favoritos** y las **décadas** con catálogo (Años 60–90). El browse cronológico sigue siendo décadas → años → canciones (reproducción vía YouTube).
+
+- **Favoritos**: marca canciones desde el menú contextual del listado de un año; reábrelas desde la carpeta Favoritos (preferencias locales del perfil Kodi, no forman parte del CSV editorial).
+- Al entrar en un **año**, la vista muestra ese año como categoría/cabecera.
 
 ## Desarrollo y tests
 

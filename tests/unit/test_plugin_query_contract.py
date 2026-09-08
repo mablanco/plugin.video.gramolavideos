@@ -4,8 +4,16 @@ import pytest
 
 pytestmark = pytest.mark.legacy_freeze
 
-# Contract snapshot — keep in sync with specs/003-navegacion-videos/contracts/plugin-navigation.md
-MODES = {None, "decade", "year", "song"}
+# Contract snapshot — keep in sync with plugin navigation (003+006)
+MODES = {
+    None,
+    "decade",
+    "year",
+    "song",
+    "favorites",
+    "favorite_add",
+    "favorite_remove",
+}
 FOLDERNAME_FOR = {
     None: None,  # unused when listing decades
     "decade": "D",  # decade start year e.g. 1980
@@ -15,7 +23,15 @@ FOLDERNAME_FOR = {
 
 
 def test_mode_values_documented():
-    assert MODES == {None, "decade", "year", "song"}
+    assert MODES == {
+        None,
+        "decade",
+        "year",
+        "song",
+        "favorites",
+        "favorite_add",
+        "favorite_remove",
+    }
 
 
 def test_parse_qs_mode_none_for_root():

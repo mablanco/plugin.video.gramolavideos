@@ -28,6 +28,7 @@ def _run_addon(query):
         "kodi_notify",
         "kodi_i18n",
         "catalog",
+        "favorites",
         "youtube_probe",
     ):
         if name in sys.modules:
@@ -35,18 +36,21 @@ def _run_addon(query):
     return importlib.import_module("addon")
 
 
-def test_root_lists_decades_not_flat_years(csv_dir):
+def test_root_lists_favorites_and_decades(csv_dir):
     _run_addon("")
     contents = xbmcplugin.calls_named("setContent")
     assert contents and contents[0]["kwargs"]["content"] == "musicvideos"
     adds = xbmcplugin.calls_named("addDirectoryItem")
-    # Seed 60/70 + legacy 80/90 → four decades (not flat year list)
-    assert len(adds) == 4
+    # Favoritos + 4 decades
+    assert len(adds) == 5
     assert len(adds) <= 12
     assert all(c["kwargs"]["isFolder"] is True for c in adds)
     labels = [c["kwargs"]["listitem"].getLabel() for c in adds]
-    assert labels == ["Años 60", "Años 70", "Años 80", "Años 90"]
-    for call in adds:
+    assert labels[0] == "Favoritos"
+    assert labels[1:] == ["Años 60", "Años 70", "Años 80", "Años 90"]
+    qs0 = parse_qs(urlparse(adds[0]["kwargs"]["url"]).query)
+    assert qs0["mode"] == ["favorites"]
+    for call in adds[1:]:
         qs = parse_qs(urlparse(call["kwargs"]["url"]).query)
         assert qs["mode"] == ["decade"]
         assert qs["foldername"][0] in ("1960", "1970", "1980", "1990")

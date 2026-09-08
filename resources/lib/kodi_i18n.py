@@ -20,6 +20,14 @@ _FALLBACK = {
     30011: "Años 70",
     30012: "Años 80",
     30013: "Años 90",
+    30020: "Favoritos",
+    30021: "Añadir a favoritos",
+    30022: "Quitar de favoritos",
+    30023: "No hay favoritos todavía.",
+    30024: "Añadido a favoritos.",
+    30025: "Quitado de favoritos.",
+    30026: "No se pudo guardar el favorito.",
+    30027: "Este favorito ya no está en el catálogo.",
 }
 
 

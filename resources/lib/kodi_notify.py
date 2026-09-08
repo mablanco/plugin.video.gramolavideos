@@ -42,3 +42,10 @@ def notify_playback_blocked(kind: str, heading: Optional[str] = None) -> None:
     else:
         message = kodi_i18n.localize(STRING_PLAYBACK_UNAVAILABLE)
     xbmcgui.Dialog().notification(heading, message, time=5000)
+
+
+def notify_message(message: str, heading: Optional[str] = None) -> None:
+    """Generic friendly notification (favorites / search empty states)."""
+    if heading is None:
+        heading = kodi_i18n.localize(STRING_HEADING)
+    xbmcgui.Dialog().notification(heading, message, time=5000)

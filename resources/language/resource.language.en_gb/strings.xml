@@ -11,4 +11,13 @@
     <string id="30011">1970s</string>
     <string id="30012">1980s</string>
     <string id="30013">1990s</string>
+    <!-- Favorites (feature 006) -->
+    <string id="30020">Favorites</string>
+    <string id="30021">Add to favorites</string>
+    <string id="30022">Remove from favorites</string>
+    <string id="30023">No favorites yet.</string>
+    <string id="30024">Added to favorites.</string>
+    <string id="30025">Removed from favorites.</string>
+    <string id="30026">Could not save the favorite.</string>
+    <string id="30027">This favorite is no longer in the catalog.</string>
 </strings>

@@ -11,6 +11,22 @@ _STRINGS = {
     30000: "La Gramola de Videos",
     30001: "Hay un problema en el catálogo; se muestra lo usable.",
     30002: "Hay %d problemas en el catálogo; se muestra lo usable.",
+    30003: "Este vídeo ya no está disponible en YouTube.",
+    30004: (
+        "Este vídeo es privado o requiere iniciar sesión en YouTube."
+    ),
+    30010: "Años 60",
+    30011: "Años 70",
+    30012: "Años 80",
+    30013: "Años 90",
+    30020: "Favoritos",
+    30021: "Añadir a favoritos",
+    30022: "Quitar de favoritos",
+    30023: "No hay favoritos todavía.",
+    30024: "Añadido a favoritos.",
+    30025: "Quitado de favoritos.",
+    30026: "No se pudo guardar el favorito.",
+    30027: "Este favorito ya no está en el catálogo.",
 }
 
 

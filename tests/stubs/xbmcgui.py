@@ -5,8 +5,9 @@ _notifications = []
 
 
 def reset():
-    global _notifications
+    global _notifications, _next_input
     _notifications = []
+    _next_input = None
 
 
 class ListItem(object):
@@ -21,6 +22,8 @@ class ListItem(object):
         self._art = {}
         self._info = {}
         self._properties = {}
+        self._context_menu = []
+        self._context_replace = False
 
     def getLabel(self):
         return self.label
@@ -34,6 +37,13 @@ class ListItem(object):
     def setProperty(self, key, value):
         self._properties[key] = value
 
+    def addContextMenuItems(self, items, replaceItems=False):
+        self._context_menu = list(items or [])
+        self._context_replace = bool(replaceItems)
+
+
+_next_input = None
+
 
 class Dialog(object):
     def notification(self, heading, message, icon="", time=5000, sound=True):
@@ -46,6 +56,19 @@ class Dialog(object):
                 "sound": sound,
             }
         )
+
+    def input(self, heading, defaultt="", type=0, **kwargs):
+        global _next_input
+        value = _next_input
+        _next_input = None
+        if value is None:
+            return ""
+        return value
+
+
+def set_next_input(value):
+    global _next_input
+    _next_input = value
 
 
 def get_notifications():

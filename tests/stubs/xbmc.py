@@ -19,8 +19,12 @@ def set_translate_root(path):
 
 
 def translatePath(path):
-    """Map special://home/addons/<id>/... to a configurable fake root."""
+    """Map special:// paths to a configurable fake root for host tests."""
     import os
+
+    if _translate_root and path.startswith("special://profile/"):
+        rest = path[len("special://profile/") :]
+        return os.path.join(_translate_root, ".kodi_profile", rest.replace("/", os.sep))
 
     prefix = "special://home/addons/"
     if _translate_root and path.startswith(prefix):

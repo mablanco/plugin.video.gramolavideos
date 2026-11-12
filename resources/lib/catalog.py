@@ -9,6 +9,7 @@ from typing import List, Optional, Sequence, Tuple
 
 YEAR_STEM_RE = re.compile(r"^\d{4}$")
 VIDEO_ID_RE = re.compile(r"^[A-Za-z0-9_-]{11}$")
+DECADE_ID_RE = re.compile(r"^\d{3}0$")
 
 
 class Year(object):
@@ -170,6 +171,17 @@ def list_decades(csv_dir: str) -> CatalogLoadResult:
 def years_in_decade(csv_dir: str, decade_id: str) -> CatalogLoadResult:
     """List years in ``[decade_id, decade_id+9]`` that exist in the catalog."""
     years_result = list_years(csv_dir)
+    if not DECADE_ID_RE.match(decade_id or ""):
+        return CatalogLoadResult(
+            years=[],
+            errors=[
+                CatalogError(
+                    "invalid_decade_id",
+                    "invalid decade id: {0!r}".format(decade_id),
+                )
+            ],
+            ok=True,
+        )
     start = int(decade_id)
     end = start + 9
     filtered = [
@@ -185,6 +197,16 @@ def years_in_decade(csv_dir: str, decade_id: str) -> CatalogLoadResult:
 def load_year(csv_dir: str, year_id: str) -> CatalogLoadResult:
     """Load and validate only ``{year_id}.csv`` (FR-009); omit bad rows into ``errors``."""
     errors: List[CatalogError] = []
+    if not YEAR_STEM_RE.match(year_id or ""):
+        # Never build a path from an unvalidated id (no ../ or absolute paths).
+        errors.append(
+            CatalogError(
+                "invalid_year_id",
+                "invalid year id: {0!r}".format(year_id),
+                year_id=year_id,
+            )
+        )
+        return CatalogLoadResult(videos=[], errors=errors, ok=True)
     if not os.path.isdir(csv_dir):
         errors.append(
             CatalogError(

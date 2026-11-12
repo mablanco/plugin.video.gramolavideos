@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import tempfile
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -82,9 +83,22 @@ def save_store(path: str, favorites: List[Dict[str, str]]) -> None:
     if parent:
         os.makedirs(parent, exist_ok=True)
     payload = {"version": STORE_VERSION, "favorites": list(favorites)}
-    with open(path, "w", encoding="utf-8") as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
+    # Write to a temp file in the same directory, then swap it in atomically
+    # so a crash mid-write never leaves a truncated favorites.json.
+    fd, tmp_path = tempfile.mkstemp(
+        prefix=".favorites.", suffix=".tmp", dir=parent or "."
+    )
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+        os.replace(tmp_path, path)
+    except BaseException:
+        try:
+            os.remove(tmp_path)
+        except OSError:
+            pass
+        raise
 
 
 def contains(path: str, year_id: str, video_id: str) -> bool:

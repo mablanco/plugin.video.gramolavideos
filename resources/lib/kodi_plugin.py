@@ -297,7 +297,10 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
         return
 
     if mode[0] == "decade":
-        decade_id = args["foldername"][0]
+        decade_id = args.get("foldername", [""])[0]
+        if not catalog.DECADE_ID_RE.match(decade_id):
+            xbmcplugin.endOfDirectory(handle, succeeded=False)
+            return
         result = catalog.years_in_decade(catalog_dir, decade_id)
         kodi_notify.notify_catalog_errors(result.errors)
         for year in result.years:
@@ -310,7 +313,10 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
         return
 
     if mode[0] == "year":
-        year_id = args["foldername"][0]
+        year_id = args.get("foldername", [""])[0]
+        if not catalog.YEAR_STEM_RE.match(year_id):
+            xbmcplugin.endOfDirectory(handle, succeeded=False)
+            return
         xbmcplugin.setPluginCategory(handle, year_id)
         result = catalog.load_year(catalog_dir, year_id)
         kodi_notify.notify_catalog_errors(result.errors)
@@ -332,8 +338,13 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
         return
 
     if mode[0] == "song":
-        video_id = args["foldername"][0]
+        video_id = args.get("foldername", [""])[0]
         year_id = args.get("year_id", [None])[0]
+        if not catalog.VIDEO_ID_RE.match(video_id) or (
+            year_id and not catalog.YEAR_STEM_RE.match(year_id)
+        ):
+            xbmcplugin.setResolvedUrl(handle, False, xbmcgui.ListItem())
+            return
         if year_id:
             result = catalog.load_year(catalog_dir, year_id)
             if not any(v.video_id == video_id for v in result.videos):

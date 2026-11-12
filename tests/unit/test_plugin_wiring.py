@@ -134,7 +134,7 @@ def test_play_song_blocks_private_with_notification(monkeypatch):
         "probe_youtube_video",
         lambda *_a, **_k: youtube_probe.STATUS_PRIVATE,
     )
-    vid = "privateVideo1"
+    vid = "privateVid1"
     sys.argv = [
         "plugin://plugin.video.gramolavideos/",
         "1",

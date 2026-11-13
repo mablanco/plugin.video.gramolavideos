@@ -171,17 +171,6 @@ def list_decades(csv_dir: str) -> CatalogLoadResult:
 def years_in_decade(csv_dir: str, decade_id: str) -> CatalogLoadResult:
     """List years in ``[decade_id, decade_id+9]`` that exist in the catalog."""
     years_result = list_years(csv_dir)
-    if not DECADE_ID_RE.match(decade_id or ""):
-        return CatalogLoadResult(
-            years=[],
-            errors=[
-                CatalogError(
-                    "invalid_decade_id",
-                    "invalid decade id: {0!r}".format(decade_id),
-                )
-            ],
-            ok=True,
-        )
     start = int(decade_id)
     end = start + 9
     filtered = [

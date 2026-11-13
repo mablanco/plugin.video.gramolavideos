@@ -197,7 +197,7 @@ def run(argv: Optional[Sequence[str]] = None) -> None:
     set_musicvideos_content(handle)
 
     if mode is None:
-        # Root: Favoritos, Buscar, then the decades.
+        # Root: favorites, search, then the decades.
         fav_url = build_url(base_url, {"mode": "favorites"})
         xbmcplugin.addDirectoryItem(
             handle=handle,

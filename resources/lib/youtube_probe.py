@@ -41,7 +41,7 @@ def probe_youtube_video(
     request = Request(url, headers={"User-Agent": "plugin.video.gramolavideos"})
     try:
         with urlopen(request, timeout=timeout) as response:
-            return classify_oembed_http_status(getattr(response, "status", 200))
+            return classify_oembed_http_status(response.status)
     except HTTPError as exc:
         return classify_oembed_http_status(exc.code)
     except (URLError, TimeoutError, OSError, ValueError):

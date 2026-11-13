@@ -89,8 +89,8 @@ def _parse_row(
             year_id=year_id,
             row=_row_raw(fields),
         )
-    title = (fields[0] or "").strip()
-    video_id = (fields[1] or "").strip()
+    title = fields[0].strip()
+    video_id = fields[1].strip()
     if not title:
         return None, CatalogError(
             "row_invalid",
@@ -241,7 +241,7 @@ def search(
     Empty/whitespace query returns no videos and does not open CSV files.
     Results are sorted then capped at ``min(limit, 100)``.
     """
-    effective_limit = 100 if limit is None else min(max(int(limit), 0), 100)
+    effective_limit = min(max(limit, 0), 100)
     normalized = (query or "").strip().casefold()
     if not normalized:
         return CatalogLoadResult(videos=[], errors=[], ok=True)

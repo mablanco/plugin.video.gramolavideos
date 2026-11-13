@@ -83,8 +83,7 @@ def save_store(path: str, favorites: List[Dict[str, str]]) -> None:
     if parent:
         os.makedirs(parent, exist_ok=True)
     payload = {"version": STORE_VERSION, "favorites": list(favorites)}
-    # Write to a temp file in the same directory, then swap it in atomically
-    # so a crash mid-write never leaves a truncated favorites.json.
+    # Atomic replace: a crash mid-write must not truncate the store.
     fd, tmp_path = tempfile.mkstemp(
         prefix=".favorites.", suffix=".tmp", dir=parent or "."
     )

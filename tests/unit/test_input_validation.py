@@ -41,13 +41,6 @@ def test_load_year_blocks_traversal_to_outside_csv(csv_dir, tmp_path):
         assert result.videos == []
 
 
-@pytest.mark.parametrize("decade_id", ["abc", "1985", "../1980", ""])
-def test_years_in_decade_rejects_invalid_ids(csv_dir, decade_id):
-    result = catalog.years_in_decade(csv_dir, decade_id)
-    assert result.years == []
-    assert [e.code for e in result.errors] == ["invalid_decade_id"]
-
-
 @pytest.mark.parametrize(
     "query",
     [

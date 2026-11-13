@@ -125,13 +125,11 @@ def add(
     if contains(path, year_id, video_id):
         return True, None
     result = catalog.load_year(catalog_dir, year_id)
-    if not any(v.video_id == video_id for v in result.videos):
+    match = next((v for v in result.videos if v.video_id == video_id), None)
+    if match is None:
         return False, "not_in_catalog"
-    # Prefer live catalog title when available.
-    for video in result.videos:
-        if video.video_id == video_id:
-            title = video.title
-            break
+    # Store the catalog title, not the one passed in the plugin URL.
+    title = match.title
     favorites = load_store(path)
     favorites.append(
         {
